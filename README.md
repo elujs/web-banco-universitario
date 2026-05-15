@@ -1,38 +1,44 @@
-# web-banco-universitario
+# Web Banco Universitario
 
-This template should help get you started developing with Vue 3 in Vite.
+Este repositorio contiene el código fuente del sitio web institucional. El proyecto está construido con Vue 3, Vite y Tailwind CSS v3.
 
-## Recommended IDE Setup
+## Requisitos Previos
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Node.js instalado en el sistema.
+- Git instalado.
+- Editor recomendado: Visual Studio Code con la extensión "Vue - Official" instalada.
 
-## Recommended Browser Setup
+## Configuración:
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+Abran la consola en la carpeta donde deseen guardar el proyecto y ejecuten:
 
-## Customize configuration
+**1. Clonar el repositorio**
+Descarga el código actual desde GitHub a tu computadora:
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+```bash
+git clone https://github.com/elujs/web-banco-universitario
 
-## Project Setup
+```
 
-```sh
+**2. Entrar a la carpeta del proyecto**
+
+```bash
+cd web-banco-universitario
+
+```
+
+**3. Instalar dependencias**
+Este comando descarga Vue, Tailwind y todas las herramientas necesarias. Solo deben hacerlo la primera vez que clonan el proyecto o si alguien instala una nueva librería:
+
+```bash
 npm install
+
 ```
 
-### Compile and Hot-Reload for Development
+**4. Levantar el servidor de desarrollo**
+Para ver la página en vivo y que se actualice mientras guardan los cambios:
 
-```sh
+```bash
 npm run dev
-```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
 ```
