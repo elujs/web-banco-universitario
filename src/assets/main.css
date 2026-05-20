@@ -5,6 +5,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300;400;500;600;700;800;900&display=swap');
 
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: 0 0% 14.5%;
+    --primary: #030213;
+    --muted: #ececf0;
+    --muted-foreground: #717182;
+    --accent: #e9ebef;
+    --destructive: #d4183d;
+    --border: rgba(0, 0, 0, 0.1);
+    --input-background: #f3f3f5;
+  }
+
+  body {
+    @apply bg-background text-[#030213];
+    font-family: 'Montserrat', sans-serif;
+  }
+}
+
 html {
   scroll-behavior: smooth;
 }
