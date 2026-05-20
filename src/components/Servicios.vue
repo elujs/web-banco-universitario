@@ -24,24 +24,27 @@
 </template>
 
 <script setup>
-import { Bank, CreditCard, Wallet, FileText, Headphones } from 'lucide-vue-next'
+import { Landmark, CreditCard, Wallet, FileText, Headphones } from 'lucide-vue-next'
 import { ref } from 'vue'
 
 const services = ref([
   {
     title: 'Cuentas',
-    description: 'Apertura y gestión de cuentas corrientes y de ahorro para estudiantes y personal.',
-    icon: Bank,
+    description:
+      'Apertura y gestión de cuentas corrientes y de ahorro para estudiantes y personal.',
+    icon: Landmark,
   },
   {
     title: 'Créditos',
-    description: 'Créditos estudiantiles y par el personal universitario con condiciones especiales para la comunidad universitaria.',
+    description:
+      'Créditos estudiantiles y par el personal universitario con condiciones especiales para la comunidad universitaria.',
     icon: CreditCard,
   },
 
   {
     title: 'Ahorros',
-    description: 'Programas de ahorro diseñados para estudiantes y personal universitario, con beneficios exclusivos.',
+    description:
+      'Programas de ahorro diseñados para estudiantes y personal universitario, con beneficios exclusivos.',
     icon: Wallet,
   },
 
@@ -62,7 +65,7 @@ const services = ref([
     description: 'cobro de becas directamente desde la app.',
     icon: FileText,
   },
- 
+
   {
     title: 'Atención al cliente',
     description: 'numeros de atencion al cliente y resolucion de dudas.',
@@ -71,5 +74,4 @@ const services = ref([
 ])
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
