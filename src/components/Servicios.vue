@@ -31,7 +31,7 @@ const services = ref([
   {
     title: 'Cuentas',
     description:
-      'Apertura y gestión de cuentas corrientes y de ahorro para estudiantes y personal.',
+      'Apertura y gestión de cuentas corrientes y de ahorro para estudiantes y para el personal universitario .',
     icon: Landmark,
   },
   {
@@ -49,28 +49,24 @@ const services = ref([
   },
 
   {
-    title: 'Transferencias',
-    description: 'Transferencias instantáneas.',
+    title: 'Transferencias entre estudiantes sin comision',
+    description: 'El Banco Universitario ofrece un servicio de transferencias entre estudiantes sin costo alguno. ',
     icon: FileText,
   },
 
   {
-    title: 'Pagos',
-    description: 'Pagos de matrícula directamente desde la app.',
+    title: 'Pago de matrícula estudiantil',
+    description: 'El Banco Universitario ofrece un servicio de pago de matrícula estudiantil, que permite a los estudiantes universitarios pagar sus matrículas de manera rápida y sencilla.',
     icon: FileText,
   },
 
   {
-    title: 'cobro de becas',
-    description: 'cobro de becas directamente desde la app.',
+    title: 'Cobro de becas estudiantiles',
+    description: 'El Banco Universitario permite a los estudiantes universitarios cobrar sus becas estudiantiles de manera sencilla y eficiente.',
     icon: FileText,
   },
 
-  {
-    title: 'Atención al cliente',
-    description: 'numeros de atencion al cliente y resolucion de dudas.',
-    icon: Headphones,
-  },
+  
 ])
 </script>
 
