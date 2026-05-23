@@ -29,11 +29,16 @@
         </div>
 
         <div
-          class="relative flex items-center justify-center bg-gray-100 rounded-[55px] h-[600px] w-full max-w-[320px] mx-auto border-[14px] border-gray-800 shadow-2xl"
+          class="relative flex items-center justify-center bg-white rounded-[55px] h-[600px] w-full max-w-[320px] mx-auto border-[14px] border-gray-800 shadow-2xl overflow-hidden"
         >
-          <p class="text-gray-400 font-bold text-center">
-            App Mockup<br />(Aquí va el diseño del celular)
-          </p>
+          <div
+            class="absolute top-0 left-1/2 transform -translate-x-1/2 w-[120px] h-[30px] bg-gray-800 rounded-b-[20px] z-20"
+          ></div>
+          <img
+            src="@/assets/dashboard-mockup.png"
+            alt="Banca en línea"
+            class="w-full h-full object-cover object-top"
+          />
         </div>
       </div>
     </div>
