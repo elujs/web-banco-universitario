@@ -35,16 +35,16 @@ const services = ref([
     icon: Landmark,
   },
   {
-    title: 'Créditos',
+    title: 'Depósitos en efectivo',
     description:
-      'Créditos estudiantiles y par el personal universitario con condiciones especiales para la comunidad universitaria.',
+      'El Banco Universitario permite a los estudiantes realizar depósitos en efectivo de manera sencilla y cómoda en cualquiera de sus sucursales. ',
     icon: CreditCard,
   },
 
   {
-    title: 'Ahorros',
+    title: 'Retiros en efectivo',
     description:
-      'Programas de ahorro diseñados para estudiantes y personal universitario, con beneficios exclusivos.',
+      'El Banco Universitario también permite a los estudiantes realizar retiros en efectivo de manera rápida y segura. Los estudiantes pueden realizar retiros en cualquiera de las sucursales del banco.',
     icon: Wallet,
   },
 
