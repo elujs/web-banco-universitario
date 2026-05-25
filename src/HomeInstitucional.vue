@@ -3,6 +3,7 @@
     <Navbar />
     <main class="flex-grow">
       <Hero />
+      <Aliados />
       <Servicios />
       <Nosotros />
     </main>
@@ -12,8 +13,9 @@
 
 <script setup>
 import Navbar from '@/components/Navbar.vue'
+import Hero from '@/components/hero.vue'
+import Aliados from '@/components/Aliados.vue'
 import Servicios from '@/components/Servicios.vue'
-import Hero from '@/components/Hero.vue'
 import Nosotros from '@/components/Nosotros.vue'
 import Footer from '@/components/Footer.vue'
 </script>

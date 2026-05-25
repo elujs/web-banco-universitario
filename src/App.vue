@@ -3,5 +3,5 @@
 </template>
 
 <script setup>
-import HomeInstitucional from '@/views/HomeInstitucional.vue'
+import HomeInstitucional from './HomeInstitucional.vue'
 </script>

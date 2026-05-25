@@ -1,22 +1,35 @@
 <template>
   <section id="servicios" class="py-16 bg-white">
-    <div class="container mx-auto px-6">
-      <h2 class="text-3xl font-bold text-gray-900 mb-2">Nuestros servicios</h2>
-      <p class="text-gray-600 mb-8"></p>
+    <div class="max-w-7xl mx-auto px-6">
+      
+      <h2 class="text-4xl font-extrabold text-[#030213] text-center mb-12 tracking-tight font-alternates">
+      Nuestros Productos
+      </h2>
 
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         <article
           v-for="service in services"
           :key="service.title"
-          class="p-6 bg-gray-50 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow"
+          class="bg-white rounded-2xl p-8 border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col items-start justify-between min-h-[380px]"
         >
-          <div class="flex items-center gap-4 mb-4">
-            <div class="p-3 bg-[#085F63] text-white rounded-lg">
-              <component :is="service.icon" :size="20" />
+          <div class="w-full">
+            <div class="bg-[#e9ebef] p-4 rounded-xl inline-flex items-center justify-center mb-6 text-[#085F63]">
+              <component :is="service.icon" :size="28" />
             </div>
-            <h3 class="text-lg font-semibold text-gray-900">{{ service.title }}</h3>
+
+            <h3 class="text-xl font-bold text-[#030213] mb-3">
+              {{ service.title }}
+            </h3>
+
+            <p class="text-gray-500 text-sm leading-relaxed mb-6">
+              {{ service.description }}
+            </p>
           </div>
-          <p class="text-gray-600 text-sm">{{ service.description }}</p>
+
+          <button class="w-full bg-[#085F63] hover:bg-[#0a7a7f] text-white py-3 px-6 rounded-full font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 group hover:shadow-lg hover:shadow-[#085F63]/20">
+            Saber más
+            <span class="transform group-hover:translate-x-1 transition-transform">→</span>
+          </button>
         </article>
       </div>
     </div>
@@ -24,50 +37,30 @@
 </template>
 
 <script setup>
-import { Landmark, CreditCard, Wallet, FileText, Headphones } from 'lucide-vue-next'
+// Importamos los iconos correctos usando la librería oficial que actualizamos antes (@lucide/vue)
+// GraduationCap = Sombrero de graduación, Wallet = Billetera, PiggyBank = Alcancía
+import { GraduationCap, Wallet, PiggyBank } from 'lucide-vue-next'
 import { ref } from 'vue'
 
 const services = ref([
   {
-    title: 'Cuentas',
-    description:
-      'Apertura y gestión de cuentas corrientes y de ahorro para estudiantes y para el personal universitario .',
-    icon: Landmark,
+    title: 'Cuenta Universitaria',
+    description: 'Sin costo de mantenimiento. Tu dinero siempre disponible para lo que necesites.',
+    icon: GraduationCap,
   },
   {
-    title: 'Depósitos en efectivo',
-    description:
-      'El Banco Universitario permite a los estudiantes realizar depósitos en efectivo de manera sencilla y cómoda en cualquiera de sus sucursales. ',
-    icon: CreditCard,
-  },
-
-  {
-    title: 'Retiros en efectivo',
-    description:
-      'El Banco Universitario también permite a los estudiantes realizar retiros en efectivo de manera rápida y segura. Los estudiantes pueden realizar retiros en cualquiera de las sucursales del banco.',
+    title: 'Crédito Educativo',
+    description: 'Financia tu matrícula, materiales o equipos tecnológicos con las mejores tasas del mercado.',
     icon: Wallet,
   },
-
   {
-    title: 'Transferencias entre estudiantes sin comision',
-    description: 'El Banco Universitario ofrece un servicio de transferencias entre estudiantes sin costo alguno. ',
-    icon: FileText,
+    title: 'Ahorro Programado',
+    description: 'Organiza tus finanzas paso a paso y alcanza tus metas universitarias fácilmente.',
+    icon: PiggyBank,
   },
-
-  {
-    title: 'Pago de matrícula estudiantil',
-    description: 'El Banco Universitario ofrece un servicio de pago de matrícula estudiantil, que permite a los estudiantes universitarios pagar sus matrículas de manera rápida y sencilla.',
-    icon: FileText,
-  },
-
-  {
-    title: 'Cobro de becas estudiantiles',
-    description: 'El Banco Universitario permite a los estudiantes universitarios cobrar sus becas estudiantiles de manera sencilla y eficiente.',
-    icon: FileText,
-  },
-
-  
 ])
 </script>
 
-<style scoped></style>
+<style scoped>
+/* No requiere estilos adicionales ya que todo se maneja de forma óptima con Tailwind CSS */
+</style>

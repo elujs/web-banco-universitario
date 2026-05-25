@@ -5,7 +5,7 @@
         <p class="text-sm font-semibold uppercase tracking-[0.24em] text-[#085F63]">
           Nosotros
         </p>
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3">
+        <h2 class="text-3xl md:text-4xl font-bold font-alternates text-gray-900 mt-3">
           Todo lo que necesitas saber sobre nuestro banco universitario
         </h2>
         <p class="text-gray-600 max-w-2xl mx-auto mt-4">
