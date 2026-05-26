@@ -5,6 +5,7 @@
       <Hero />
       <Aliados />
       <Servicios />
+      <SolucionesFinancieras />
       <Nosotros />
     </main>
     <Footer />
@@ -16,6 +17,7 @@ import Navbar from '@/components/Navbar.vue'
 import Hero from '@/components/hero.vue'
 import Aliados from '@/components/Aliados.vue'
 import Servicios from '@/components/Servicios.vue'
+import SolucionesFinancieras from '@/components/SolucionesFinancieras.vue'
 import Nosotros from '@/components/Nosotros.vue'
 import Footer from '@/components/Footer.vue'
 </script>
