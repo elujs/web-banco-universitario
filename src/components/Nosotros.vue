@@ -16,28 +16,31 @@
       <div class="grid gap-8 lg:grid-cols-3">
         <article
           v-for="(card, index) in cards"
-          :key="card.title"
-          class="group p-8 bg-white rounded-3xl border border-gray-200 shadow-sm transition-transform duration-300 hover:-translate-y-1"
-          @mouseenter="hovered = index"
-          @mouseleave="hovered = null"
-        >
-          <h3 class="text-xl font-semibold text-gray-900 mb-4">{{ card.title }}</h3>
+            :key="card.title"
+              class="group p-8 bg-white rounded-3xl border border-gray-200 shadow-sm transition-transform duration-300 hover:-translate-y-1 cursor-pointer"
+              @click="toggle(index)"
+                >
+               <h3 class="text-xl font-semibold text-gray-900 mb-4">
+                 {{ card.title }}
+               </h3>
+    
+        <p class="text-gray-600 leading-relaxed">
+          {{ openIndex === index ? card.text : card.summary }}
+        </p>
 
-          <div
-            class="overflow-hidden transition-all duration-300"
-            :class="hovered === index ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'"
-          >
-            <p v-if="card.text" class="text-gray-600 leading-relaxed">
-              {{ card.text }}
-            </p>
+    <div
+      class="overflow-hidden transition-all duration-300"
+      :class="openIndex === index ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'"
+    >
 
-            <ul v-if="card.list" class="mt-4 space-y-3 text-gray-600 list-disc list-inside">
-              <li v-for="(item, itemIndex) in card.list" :key="itemIndex">
-                {{ item }}
-              </li>
-            </ul>
-          </div>
-        </article>
+      <ul v-if="card.list && openIndex === index" class="mt-4 space-y-3 text-gray-600 list-disc list-inside">
+        <li v-for="(item, itemIndex) in card.list" :key="itemIndex">
+            {{ item }}
+        </li>
+      </ul>
+  </div>
+</article>
+      
       </div>
     </div>
   </section>
@@ -46,21 +49,32 @@
 <script setup>
 import { ref } from 'vue'
 
-const hovered = ref(null)
+const openIndex = ref(null)
+
+const toggle = (index) => {
+  openIndex.value = openIndex.value === index ? null : index
+}
 
 const cards = [
   {
     title: 'Misión',
-    text:
-      'Somos una confiable institución financiera comprometida con los estudiantes universitarios, brindando soluciones financieras ágiles y eficientes. Nuestra misión es facilitar la gestión de sus recursos y contribuir al crecimiento económico y pernal de nuestros clientes.',
+    summary: 
+      'Somos una confiable institución financiera comprometida con los estudiantes universitarios... ver más',
+      text:
+      'Somos una confiable institución financiera comprometida con los estudiantes universitarios, brindando soluciones financieras ágiles y eficientes. Nuestra misión es facilitar la gestión de sus recursos y contribuir al crecimiento económico y personal de nuestros clientes.',
   },
   {
     title: 'Visión',
+    summary: 
+      'Queremos ser la principal opción financiera para estudiantes universitarios en el país... ver más',
     text:
       'Queremos ser la principal opción financiera para estudiantes universitarios en el país, Deseamos ser reconocidos por nuestros servicios innovadores, la calidad de atención al cliente y nuestro compromiso con la educación y el desarrollo social.'
   },
   {
     title: 'Objetivos',
+    summary:
+      'Brindar a los estudiantes universitarios un servicio eficiente y de calidad en la geston... ver más',
+    text:'',  
     list: [
       'Brindar a los estudiantes universitarios un servicio eficiente y de calidad en la gestión de sus recursos financieros, a través de nuestros canales digitales y nuestros puntos de atención presencial.',
       'Fomentar el uso de nuestras plataformas digitales para hacer transferencias entre estudiantes sin comisión, depósitos y retiros en efectivo, ofreciendo herramientas tecnológicas fáciles y seguras.',
@@ -72,6 +86,4 @@ const cards = [
 ]
 </script>
 
-<style scoped>
-/* Si deseas, agrega estilos extra aquí */
-</style>
+<style scoped></style>
