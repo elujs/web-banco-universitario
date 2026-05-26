@@ -15,7 +15,7 @@
 
 <script setup>
 import Navbar from '@/components/Navbar.vue'
-import Hero from '@/components/hero.vue'
+import Hero from '@/components/Hero.vue'
 import Aliados from '@/components/Aliados.vue'
 import Servicios from '@/components/Servicios.vue'
 import SolucionesFinancieras from '@/components/SolucionesFinancieras.vue'

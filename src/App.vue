@@ -1,7 +1,7 @@
 <template>
-  <HomeInstitucional />
+  <RouterView />
 </template>
 
 <script setup>
-import HomeInstitucional from './HomeInstitucional.vue'
+import { RouterView } from 'vue-router'
 </script>
