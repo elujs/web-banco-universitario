@@ -7,6 +7,7 @@
       <Servicios />
       <SolucionesFinancieras />
       <Nosotros />
+      <Contacto />
     </main>
     <Footer />
   </div>
@@ -19,5 +20,6 @@ import Aliados from '@/components/Aliados.vue'
 import Servicios from '@/components/Servicios.vue'
 import SolucionesFinancieras from '@/components/SolucionesFinancieras.vue'
 import Nosotros from '@/components/Nosotros.vue'
+import Contacto from '@/components/Contacto.vue'
 import Footer from '@/components/Footer.vue'
 </script>
