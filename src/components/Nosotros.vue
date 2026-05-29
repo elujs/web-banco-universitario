@@ -36,7 +36,7 @@
                 Visión
               </h3>
               <p class="text-gray-500 text-sm md:text-base leading-relaxed font-sans">
-                Queremos ser la principal opción financiera para estudiantes universitarios in el país. Deseamos ser reconocidos por nuestros servicios innovadores, la calidad de atención al cliente y nuestro compromiso con la educación y el desarrollo social.
+                Queremos ser la principal opción financiera para estudiantes universitarios en el país. Deseamos ser reconocidos por nuestros servicios innovadores, la calidad de atención al cliente y nuestro compromiso con la educación y el desarrollo social.
               </p>
             </div>
           </article>
