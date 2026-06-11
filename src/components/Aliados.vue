@@ -2,7 +2,7 @@
   <section class="bg-[#f8f9fa] py-12 border-b border-gray-100">
     <div class="max-w-7xl mx-auto px-6 text-center">
       
-      <h3 class="text-xs font-semibold text-gray-400 tracking-widest uppercase mb-8">
+      <h3 class="text-sm font-semibold text-gray-400 tracking-widest uppercase mb-8">
         Aliados Universitarios
       </h3>
 
@@ -30,10 +30,10 @@
 import { ref } from 'vue'
 
 const aliados = ref([
-  { siglas: 'un', nombre: 'Universidad Nacional' },
-  { siglas: 'uc', nombre: 'Universidad Central' },
+  { siglas: 'UN', nombre: 'Universidad Nacional' },
+  { siglas: 'UC', nombre: 'Universidad Central' },
   { siglas: 'IT', nombre: 'Instituto Tecnológico' },
-  { siglas: 'ua', nombre: 'Universidad Autónoma' }
+  { siglas: 'UA', nombre: 'Universidad Autónoma' }
 ])
 </script>
 
