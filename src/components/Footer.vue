@@ -10,6 +10,7 @@
               v-for="(social, index) in socialLinks"
               :key="index"
               :href="social.href"
+              target="_blank"
               class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all duration-300 backdrop-blur-sm"
               :aria-label="social.label"
             >
@@ -29,8 +30,8 @@
 import { Facebook, Instagram, Twitter } from 'lucide-vue-next'
 
 const socialLinks = [
-  { icon: Facebook, label: 'Facebook', href: '#' },
-  { icon: Instagram, label: 'Instagram', href: '#' },
-  { icon: Twitter, label: 'Twitter', href: '#' },
+  { icon: Facebook, label: 'Facebook', href: 'https://facebook.com/bancouniversitariove' },
+  { icon: Instagram, label: 'Instagram', href: 'https://instagram.com/bancouniversitariove' },
+  { icon: Twitter, label: 'Twitter', href: 'https://twitter.com/bancouniversitariove' },
 ]
 </script>

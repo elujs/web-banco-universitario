@@ -2,7 +2,13 @@
   <nav class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 shadow-sm">
     <div class="hidden lg:flex items-center justify-between px-8 xl:px-12 py-4">
       <div class="flex items-center">
-        <img src="@/assets/logo-no-background.png" alt="Banco Universitario" class="h-10 w-auto" />
+        <a href="#inicio" class="cursor-pointer">
+          <img
+            src="@/assets/logo-no-background.png"
+            alt="Banco Universitario"
+            class="h-10 w-auto"
+          />
+        </a>
       </div>
 
       <div class="flex items-center gap-8">
@@ -35,12 +41,15 @@
     <div class="lg:hidden">
       <div class="flex items-center justify-between px-4 sm:px-6 py-3">
         <div class="flex items-center">
-          <img
-            src="@/assets/logo-no-background.png"
-            alt="Banco Universitario"
-            class="h-8 sm:h-9 w-auto"
-          />
+          <a href="#inicio" class="cursor-pointer">
+            <img
+              src="@/assets/logo-no-background.png"
+              alt="Banco Universitario"
+              class="h-8 sm:h-9 w-auto"
+            />
+          </a>
         </div>
+
         <button
           class="p-2 text-gray-700 hover:text-[#085F63] transition-colors"
           @click="mobileMenuOpen = !mobileMenuOpen"
@@ -58,12 +67,13 @@
             v-for="link in navLinks"
             :key="link.href"
             :href="link.href"
-            class="text-gray-700 hover:text-[#085F63] transition-colors py-2 px-4 rounded-lg hover:bg-gray-50"
+            class="text-gray-700 active:text-[#085F63] active:bg-gray-50 transition-colors py-2 px-4 rounded-lg block"
             @click="mobileMenuOpen = false"
           >
             {{ link.label }}
           </a>
         </div>
+
         <div class="flex flex-col space-y-3 pt-4 border-t border-gray-100">
           <button
             @click="$router.push('/banca')"

@@ -139,6 +139,4 @@
 import { ArrowRight } from 'lucide-vue-next'
 </script>
 
-<style scoped>
-/* Transiciones suaves añadidas para los efectos de hover */
-</style>
+<style scoped></style>
