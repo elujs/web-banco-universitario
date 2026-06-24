@@ -8,6 +8,7 @@
       <SolucionesFinancieras />
       <Nosotros />
       <EducationCenter />
+      <FaqsInstitucional />
       <Contacto />
     </main>
     <Footer />
@@ -22,6 +23,7 @@ import Servicios from '@/components/Servicios.vue'
 import SolucionesFinancieras from '@/components/SolucionesFinancieras.vue'
 import Nosotros from '@/components/Nosotros.vue'
 import EducationCenter from '@/components/Educationcenter.vue'
+import FaqsInstitucional from '@/components/FaqsInstitucional.vue'
 import Contacto from '@/components/Contacto.vue'
 import Footer from '@/components/Footer.vue'
 </script>
