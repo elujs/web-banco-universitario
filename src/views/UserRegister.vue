@@ -128,33 +128,51 @@
                 />
                 <p v-if="errors.documento" class="text-red-600 text-sm mt-1">{{ errors.documento }}</p>
               </div>
+            </div>
 
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="contrasena">Contraseña</label>
+              <div class="relative">
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="contrasena">
+                  Contraseña
+                </label>
                 <input
                   id="contrasena"
                   v-model="contrasena"
-                  type="password"
+                  :type="showPassword ? 'text' : 'password'"
                   placeholder="••••••••"
                   :class="inputClass(errors.contrasena)"
-                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
+                  class="w-full pr-24 px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
+                <button
+                  type="button"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-600 hover:text-gray-900"
+                  @click="togglePassword('contrasena')"
+                >
+                  {{ showPassword ? 'Ocultar' : 'Mostrar' }}
+                </button>
                 <p v-if="errors.contrasena" class="text-red-600 text-sm mt-1">{{ errors.contrasena }}</p>
               </div>
 
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="confirmarContrasena">Confirmar contraseña</label>
-                <input
-                  id="confirmarContrasena"
-                  v-model="confirmarContrasena"
-                  type="password"
-                  placeholder="••••••••"
-                  :class="inputClass(errors.confirmarContrasena)"
-                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
-                />
-                <p v-if="errors.confirmarContrasena" class="text-red-600 text-sm mt-1">{{ errors.confirmarContrasena }}</p>
-              </div>
-            </div>
+          <div class="relative">
+            <label class="block text-sm font-semibold text-gray-700 mb-2" for="confirmarContrasena">
+              Confirmar contraseña
+            </label>
+            <input
+              id="confirmarContrasena"
+              v-model="confirmarContrasena"
+              :type="showConfirmPassword ? 'text' : 'password'"
+              placeholder="••••••••"
+              :class="inputClass(errors.confirmarContrasena)"
+              class="w-full pr-24 px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
+            />
+            <button
+              type="button"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-600 hover:text-gray-900"
+              @click="togglePassword('confirmarContrasena')"
+            >
+              {{ showConfirmPassword ? 'Ocultar' : 'Mostrar' }}
+            </button>
+            <p v-if="errors.confirmarContrasena" class="text-red-600 text-sm mt-1">{{ errors.confirmarContrasena }}</p>
+          </div>
 
             <button type="submit" class="w-full bg-[#085F63] hover:bg-[#0a7a7f] text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-300">
               Crear usuario
@@ -197,6 +215,18 @@ const errors = reactive({
   contrasena: '',
   confirmarContrasena: ''
 })
+
+const showPassword = ref(false)
+const showConfirmPassword = ref(false)
+
+function togglePassword(field) {
+  if (field === 'contrasena') {
+    showPassword.value = !showPassword.value
+  } else {
+    showConfirmPassword.value = !showConfirmPassword.value
+  }
+}
+ 
 
 const inputClass = (err) =>
   `w-full px-4 py-3 rounded-2xl border ${err ? 'border-red-300 ring-2 ring-red-200' : 'border-gray-200'} bg-gray-50 text-gray-900 focus:outline-none transition`
