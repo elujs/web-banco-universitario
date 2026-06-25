@@ -16,14 +16,14 @@
 </template>
 
 <script setup>
-import Navbar from '@/components/Navbar.vue'
-import Hero from '@/components/Hero.vue'
-import Aliados from '@/components/Aliados.vue'
-import Servicios from '@/components/Servicios.vue'
-import SolucionesFinancieras from '@/components/SolucionesFinancieras.vue'
-import Nosotros from '@/components/Nosotros.vue'
-import EducationCenter from '@/components/Educationcenter.vue'
-import FaqsInstitucional from '@/components/FaqsInstitucional.vue'
-import Contacto from '@/components/Contacto.vue'
-import Footer from '@/components/Footer.vue'
+import Navbar from '@/components/landing/Navbar.vue'
+import Hero from '@/components/landing/Hero.vue'
+import Aliados from '@/components/landing/Aliados.vue'
+import Servicios from '@/components/landing/Servicios.vue'
+import SolucionesFinancieras from '@/components/landing/SolucionesFinancieras.vue'
+import Nosotros from '@/components/landing/Nosotros.vue'
+import EducationCenter from '@/components/landing/Educationcenter.vue'
+import FaqsInstitucional from '@/components/landing/FaqsInstitucional.vue'
+import Contacto from '@/components/landing/Contacto.vue'
+import Footer from '@/components/landing/Footer.vue'
 </script>
