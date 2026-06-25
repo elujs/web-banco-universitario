@@ -20,83 +20,89 @@
         <div class="p-8 md:p-10">
           <div class="mb-8">
             <h1 class="text-2xl font-bold text-gray-900">Crear nueva cuenta</h1>
-            <p class="text-gray-600 mt-2">
-              Ingresa los datos del usuario para completar el registro.
-            </p>
+            <p class="text-gray-600 mt-2">Ingresa los datos del usuario para completar el registro.</p>
           </div>
 
-          <form class="space-y-5" @submit.prevent>
+          <form class="space-y-5" @submit.prevent="onSubmit">
             <div class="grid gap-5 md:grid-cols-2">
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="nombre">
-                  Nombre
-                </label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="nombre">Nombre</label>
                 <input
                   id="nombre"
+                  v-model="nombre"
+                  @input="onTextInput($event,'nombre')"
                   type="text"
                   placeholder="Ej. María"
-                  class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
+                  :class="inputClass(errors.nombre)"
+                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
+                <p v-if="errors.nombre" class="text-red-600 text-sm mt-1">{{ errors.nombre }}</p>
               </div>
 
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="apellido">
-                  Apellido
-                </label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="apellido">Apellido</label>
                 <input
                   id="apellido"
+                  v-model="apellido"
+                  @input="onTextInput($event,'apellido')"
                   type="text"
                   placeholder="Ej. Pérez"
-                  class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
+                  :class="inputClass(errors.apellido)"
+                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
+                <p v-if="errors.apellido" class="text-red-600 text-sm mt-1">{{ errors.apellido }}</p>
               </div>
             </div>
 
             <div class="grid gap-5 md:grid-cols-2">
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="email">
-                  Correo electrónico
-                </label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="email">Correo electrónico</label>
                 <input
                   id="email"
-                  type="text"
+                  v-model="email"
+                  type="email"
                   placeholder="usuario@correo.com"
-                  class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
+                  :class="inputClass(errors.email)"
+                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
+                <p v-if="errors.email" class="text-red-600 text-sm mt-1">{{ errors.email }}</p>
               </div>
 
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="telefono">
-                  Teléfono
-                </label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="telefono">Teléfono</label>
                 <input
                   id="telefono"
-                  type="text"
+                  v-model="telefono"
+                  @input="onNumberInput($event,'telefono')"
+                  inputmode="numeric"
                   placeholder="+58 412 123 4567"
-                  class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
+                  :class="inputClass(errors.telefono)"
+                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
+                <p v-if="errors.telefono" class="text-red-600 text-sm mt-1">{{ errors.telefono }}</p>
               </div>
             </div>
 
             <div class="grid gap-5 md:grid-cols-2">
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="fechaNacimiento">
-                  Fecha de nacimiento
-                </label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="fechaNacimiento">Fecha de nacimiento</label>
                 <input
                   id="fechaNacimiento"
+                  v-model="fechaNacimiento"
                   type="date"
-                  class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
+                  :class="inputClass(errors.fechaNacimiento)"
+                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
+                <p v-if="errors.fechaNacimiento" class="text-red-600 text-sm mt-1">{{ errors.fechaNacimiento }}</p>
               </div>
 
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="tipoUsuario">
-                  Tipo de usuario
-                </label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="tipoUsuario">Tipo de usuario</label>
                 <select
                   id="tipoUsuario"
-                  class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
+                  v-model="tipoUsuario"
+                  :class="inputClass(errors.tipoUsuario)"
+                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 >
                   <option value="">Selecciona un tipo</option>
                   <option value="estudiante">Estudiante</option>
@@ -104,60 +110,57 @@
                   <option value="administrativo">Administrativo</option>
                   <option value="externo">Externo</option>
                 </select>
+                <p v-if="errors.tipoUsuario" class="text-red-600 text-sm mt-1">{{ errors.tipoUsuario }}</p>
               </div>
             </div>
 
             <div class="grid gap-5 md:grid-cols-2">
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="documento">
-                  Nº de documento
-                </label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="documento">Nº de documento</label>
                 <input
                   id="documento"
-                  type="text"
+                  v-model="documento"
+                  @input="onNumberInput($event,'documento')"
+                  inputmode="numeric"
                   placeholder="V-12345678"
-                  class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
+                  :class="inputClass(errors.documento)"
+                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
+                <p v-if="errors.documento" class="text-red-600 text-sm mt-1">{{ errors.documento }}</p>
               </div>
 
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="contrasena">
-                  Contraseña
-                </label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="contrasena">Contraseña</label>
                 <input
                   id="contrasena"
-                  type="text"
+                  v-model="contrasena"
+                  type="password"
                   placeholder="••••••••"
-                  class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
+                  :class="inputClass(errors.contrasena)"
+                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
+                <p v-if="errors.contrasena" class="text-red-600 text-sm mt-1">{{ errors.contrasena }}</p>
               </div>
 
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="confirmarContrasena">
-                  Confirmar contraseña
-                </label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="confirmarContrasena">Confirmar contraseña</label>
                 <input
                   id="confirmarContrasena"
-                  type="text"
+                  v-model="confirmarContrasena"
+                  type="password"
                   placeholder="••••••••"
-                  class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
+                  :class="inputClass(errors.confirmarContrasena)"
+                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
+                <p v-if="errors.confirmarContrasena" class="text-red-600 text-sm mt-1">{{ errors.confirmarContrasena }}</p>
               </div>
-
             </div>
 
-            <button
-              type="submit"
-              class="w-full bg-[#085F63] hover:bg-[#0a7a7f] text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-300"
-            >
+            <button type="submit" class="w-full bg-[#085F63] hover:bg-[#0a7a7f] text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-300">
               Crear usuario
             </button>
 
-            <button
-            @click="$router.push('/')"
-              type="button"
-              class="w-full bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold px-6 py-3 rounded-2xl transition-all duration-300"
-            >
+            <button @click="goHome" type="button" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold px-6 py-3 rounded-2xl transition-all duration-300">
               Volver al inicio
             </button>
           </form>
@@ -168,4 +171,89 @@
 </template>
 
 <script setup>
+import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const nombre = ref('')
+const apellido = ref('')
+const email = ref('')
+const telefono = ref('')
+const fechaNacimiento = ref('')
+const tipoUsuario = ref('')
+const documento = ref('')
+const contrasena = ref('')
+const confirmarContrasena = ref('')
+
+const errors = reactive({
+  nombre: '',
+  apellido: '',
+  email: '',
+  telefono: '',
+  fechaNacimiento: '',
+  tipoUsuario: '',
+  documento: '',
+  contrasena: '',
+  confirmarContrasena: ''
+})
+
+const inputClass = (err) =>
+  `w-full px-4 py-3 rounded-2xl border ${err ? 'border-red-300 ring-2 ring-red-200' : 'border-gray-200'} bg-gray-50 text-gray-900 focus:outline-none transition`
+
+function sanitizeNumberInput(value) {
+  return (value || '').replace(/\D+/g, '')
+}
+
+function onNumberInput(e, field) {
+  const clean = sanitizeNumberInput(e.target.value)
+  if (field === 'telefono') telefono.value = clean
+  else if (field === 'documento') documento.value = clean
+  e.target.value = clean
+}
+
+function onTextInput(e, field) {
+  // permite letras, espacios, acentos, guiones y apóstrofe
+  const clean = (e.target.value || '').replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s'-]/g, '')
+  if (field === 'nombre') nombre.value = clean
+  if (field === 'apellido') apellido.value = clean
+  e.target.value = clean
+}
+
+function validateEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+}
+
+function validate() {
+  // reset
+  Object.keys(errors).forEach(k => errors[k] = '')
+
+  let valid = true
+  if (!nombre.value.trim()) { errors.nombre = 'Falta el nombre'; valid = false }
+  if (!apellido.value.trim()) { errors.apellido = 'Falta el apellido'; valid = false }
+  if (!email.value.trim()) { errors.email = 'Falta el correo'; valid = false }
+  else if (!validateEmail(email.value)) { errors.email = 'Correo inválido'; valid = false }
+  if (!telefono.value.trim()) { errors.telefono = 'Falta el teléfono'; valid = false }
+  if (!fechaNacimiento.value) { errors.fechaNacimiento = 'Falta la fecha de nacimiento'; valid = false }
+  if (!tipoUsuario.value) { errors.tipoUsuario = 'Selecciona un tipo de usuario'; valid = false }
+  if (!documento.value.trim()) { errors.documento = 'Falta el número de documento'; valid = false }
+  if (!contrasena.value) { errors.contrasena = 'Falta la contraseña'; valid = false }
+  if (!confirmarContrasena.value) { errors.confirmarContrasena = 'Confirma la contraseña'; valid = false }
+  if (contrasena.value && confirmarContrasena.value && contrasena.value !== confirmarContrasena.value) {
+    errors.confirmarContrasena = 'Las contraseñas no coinciden'
+    valid = false
+  }
+
+  return valid
+}
+
+function onSubmit() {
+  if (!validate()) return
+  // Aquí solo mostramos confirmación: la lógica de envío real no está implementada.
+  alert('Formulario válido. Implementa la lógica de envío según tu backend.')
+}
+
+function goHome() {
+  router.push('/')
+}
 </script>
