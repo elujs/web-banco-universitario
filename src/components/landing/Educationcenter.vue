@@ -15,7 +15,7 @@
           </p>
 
           <div class="pt-2">
-            <button class="bg-white text-[#085F63] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 hover:shadow-lg focus:outline-none">
+            <button class="bg-[#085F63] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#085F63]/90 transition-all duration-300 hover:shadow-lg focus:outline-none">
               Ver próximos talleres
             </button>
           </div>
