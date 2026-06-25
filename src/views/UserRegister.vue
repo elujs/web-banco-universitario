@@ -59,7 +59,7 @@
                 </label>
                 <input
                   id="email"
-                  type="email"
+                  type="text"
                   placeholder="usuario@correo.com"
                   class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
                 />
@@ -71,7 +71,7 @@
                 </label>
                 <input
                   id="telefono"
-                  type="tel"
+                  type="text"
                   placeholder="+58 412 123 4567"
                   class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
                 />
@@ -126,7 +126,7 @@
                 </label>
                 <input
                   id="contrasena"
-                  type="password"
+                  type="text"
                   placeholder="••••••••"
                   class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
                 />
@@ -138,6 +138,14 @@
               class="w-full bg-[#085F63] hover:bg-[#0a7a7f] text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-300"
             >
               Crear usuario
+            </button>
+
+            <button
+            @click="$router.push('/')"
+              type="button"
+              class="w-full bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold px-6 py-3 rounded-2xl transition-all duration-300"
+            >
+              Volver al inicio
             </button>
           </form>
         </div>
