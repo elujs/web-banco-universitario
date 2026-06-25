@@ -131,6 +131,19 @@
                   class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
                 />
               </div>
+
+              <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="confirmarContrasena">
+                  Confirmar contraseña
+                </label>
+                <input
+                  id="confirmarContrasena"
+                  type="text"
+                  placeholder="••••••••"
+                  class="w-full px-4 py-3 rounded-2xl border border-gray-200 bg-gray-50 text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition"
+                />
+              </div>
+
             </div>
 
             <button
