@@ -30,10 +30,10 @@
           Iniciar Sesión
         </button>
         <button
-          @click="$router.push('/banca')"
+          @click="$router.push('/register')"
           class="bg-[#085F63] hover:bg-[#0a7a7f] text-white px-6 py-2 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-[#085F63]/30 text-sm font-semibold whitespace-nowrap"
         >
-          Banca en Línea
+          registrarse
         </button>
       </div>
     </div>
@@ -82,10 +82,10 @@
             Iniciar Sesión
           </button>
           <button
-            @click="$router.push('/banca')"
+            @click="$router.push('/registerS')"
             class="bg-[#085F63] hover:bg-[#0a7a7f] text-white py-3 px-4 rounded-full font-semibold w-full"
           >
-            Banca en Línea
+            registrarse
           </button>
         </div>
       </div>
