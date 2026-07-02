@@ -4,32 +4,32 @@ import { getMovements } from '@/services/movementService';
 import MovementFilters from '@/components/banca/movements/MovementFilters.vue';
 import MovementTable from '@/components/banca/movements/MovementTable.vue';
 
-// Referencia reactiva para almacenar los movimientos
 const movements = ref([]);
 
-// Función para cargar los datos desde la API
+// 1. Esta función carga los datos
 const loadMovements = async () => {
     try {
         const { data } = await getMovements();
-        // Asignamos el array de datos que viene del backend
-        movements.value = data.data; 
+        movements.value = data.data;
     } catch (error) {
         console.error("Error al cargar movimientos:", error);
     }
 };
 
-onMounted(loadMovements);
+// 2. Cuando la pantalla cargue (onMounted)...
+onMounted(async () => {
+    // Aquí pegamos tu token real
+    localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX3R5cGUiOiJjbGllbnQifQ.dznytO5M8cU-23bXGwu1EcO3kL2ZolJuKhw_GY2k_4Q');
+    
+    // Ahora llamamos a los movimientos
+    await loadMovements();
+});
 </script>
 
 <template>
     <div class="p-6 lg:p-8 max-w-7xl mx-auto">
-        <div class="mb-6">
-            <h1 class="text-3xl font-bold text-gray-900 mb-1">Movements</h1>
-            <p class="text-gray-500 text-sm">Full transaction history filtered by date range and type.</p>
-        </div>
-
+        <h1 class="text-3xl font-bold text-gray-900 mb-6">Movements</h1>
         <MovementFilters />
-
         <MovementTable :movements="movements" />
     </div>
 </template>

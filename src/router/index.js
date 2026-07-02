@@ -24,8 +24,8 @@ const router = createRouter({
       component: UserRegister,
     },
     {
-      path: '/mis-movimientos',
-      name: 'mis-movimientos',
+      path: '/movements',
+      name: 'movements',
       component: MovementsView
     }
   ],
