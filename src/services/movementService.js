@@ -1,28 +1,31 @@
 import axios from 'axios';
 
-// La URL base que vimos en la colección de Postman
 const API_URL = 'http://localhost:3000/v1';
 
-export const getMovements = async (page = 1, pageSize = 20) => {
-    // 1. Buscamos el token que guardaste temporalmente para probar
+// Ahora aceptamos un tercer parámetro: "filters" (un objeto vacío por defecto)
+export const getMovements = async (page = 1, pageSize = 20, filters = {}) => {
     const token = localStorage.getItem('token');
 
+    // 1. Preparamos los parámetros base que siempre deben ir
+    const queryParams = {
+        page: page,
+        page_size: pageSize
+    };
+
+    // 2. Si el usuario seleccionó algún filtro, se lo agregamos a la petición
+    if (filters.multiplier) queryParams.multiplier = filters.multiplier;
+    if (filters.fromDate) queryParams.from_date = filters.fromDate;
+    if (filters.toDate) queryParams.to_date = filters.toDate;
+
     try {
-        // 2. Hacemos la petición GET a la ruta exacta
         const response = await axios.get(`${API_URL}/client/movement`, {
-            // 3. Enviamos los query params que pide el Postman
-            params: {
-                page: page,
-                page_size: pageSize
-            },
-            // 4. Enviamos el token en las cabeceras (Headers) con la palabra "Bearer "
+            params: queryParams, // Axios armará la URL automáticamente con esto
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Accept-Language': 'es'
             }
         });
-
-        // Retornamos la respuesta completa para que tu vista la use
+        
         return response;
         
     } catch (error) {
