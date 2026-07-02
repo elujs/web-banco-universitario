@@ -4,8 +4,12 @@ defineProps({
     movements: {
         type: Array,
         required: true,
-        default: () => [] // Si no hay datos, ponemos un arreglo vacío para que no explote
-    }
+        default: () => []
+    },
+    // Añadimos estas nuevas propiedades para la paginación
+    totalItems: { type: Number, default: 20 },
+    currentPage: { type: Number, default: 1 },
+    pageSize: { type: Number, default: 10 }
 });
 
 // 2. Funciones de formato visual
@@ -69,6 +73,33 @@ const formatCurrency = (amount) => {
                 </tr>
             </tbody>
         </table>
+        <div class="flex items-center justify-between pt-6 mt-2 border-t border-gray-100">
+                <span class="text-sm text-gray-500">
+    Mostrando {{ (currentPage - 1) * pageSize + 1 }}-{{ Math.min(currentPage * pageSize, totalItems) }} de {{ totalItems }}
+</span>
+                
+                <div class="flex items-center space-x-1">
+                    <button class="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-50 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    
+                    <button class="w-8 h-8 flex items-center justify-center rounded-full bg-[#085F63] text-white font-medium shadow-sm">
+                        1
+                    </button>
+                    
+                    <button class="w-8 h-8 flex items-center justify-center rounded-full text-gray-500 hover:bg-gray-50 font-medium transition-colors">
+                        2
+                    </button>
+                    
+                    <button class="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-50 transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
     </div>
 </template>
 
