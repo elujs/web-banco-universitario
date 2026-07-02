@@ -1,44 +1,86 @@
 <script setup>
-// Recibimos los movimientos desde el padre
+// 1. IMPORTANTE: Esto es lo que le dice a Vue que vamos a recibir los datos desde afuera
 defineProps({
-  movements: {
-    type: Array,
-    default: () => []
-  }
+    movements: {
+        type: Array,
+        required: true,
+        default: () => [] // Si no hay datos, ponemos un arreglo vacío para que no explote
+    }
 });
+
+// 2. Funciones de formato visual
+const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+};
+
+const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD'
+    }).format(amount);
+};
 </script>
 
 <template>
-  <div class="bg-white overflow-hidden mt-6">
-    <table class="min-w-full divide-y divide-gray-100">
-      <thead>
-        <tr>
-          <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">ID</th>
-          <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Description</th>
-          <th class="px-6 py-4 text-left text-xs font-semibold text-gray-400 uppercase tracking-wider">Date & Time</th>
-          <th class="px-6 py-4 text-right text-xs font-semibold text-gray-400 uppercase tracking-wider">Amount</th>
-          <th class="px-6 py-4 text-right text-xs font-semibold text-gray-400 uppercase tracking-wider">Final Balance</th>
-        </tr>
-      </thead>
-      <tbody class="bg-white divide-y divide-gray-50">
-        <tr v-for="mov in movements" :key="mov.id" class="hover:bg-gray-50/50 transition-colors">
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">#{{ mov.id }}</td>
-          
-          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700 flex items-center gap-2">
-            <svg v-if="mov.amount > 0" class="w-4 h-4 text-green-500 transform rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
-            <svg v-else class="w-4 h-4 text-red-500 transform rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-            {{ mov.description }}
-          </td>
-          
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ mov.created_at }}</td>
-          
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-right font-bold" :class="mov.amount > 0 ? 'text-green-500' : 'text-gray-900'">
-            {{ mov.amount > 0 ? '+' : '' }}{{ mov.amount }}
-          </td>
-          
-          <td class="px-6 py-4 whitespace-nowrap text-sm text-right text-gray-400">{{ mov.balance }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="overflow-x-auto mt-8">
+        <table class="w-full text-left border-collapse">
+            <thead>
+                <tr class="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
+                    <th class="px-4 py-4">ID</th>
+                    <th class="px-4 py-4">Descripcion</th>
+                    <th class="px-4 py-4">Fecha y hora</th>
+                    <th class="px-4 py-4 text-right">Monto</th>
+                    <th class="px-4 py-4 text-right">Balance final</th>
+                </tr>
+            </thead>
+            
+            <tbody class="text-sm text-gray-700">
+                <tr v-for="movement in movements" :key="movement.id" class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                    
+                    <td class="px-4 py-4 text-gray-400">
+                        #{{ movement.id }}
+                    </td>
+                    
+                    <td class="px-4 py-4 font-medium text-gray-900">
+                        {{ movement.description }}
+                    </td>
+                    
+                    <td class="px-4 py-4 text-gray-500">
+                        {{ formatDate(movement.created_at) }}
+                    </td>
+
+                    <td class="px-4 py-4 text-right" :class="movement.multiplier === 1 ? 'text-income' : 'text-expense'">
+                        <span v-if="movement.multiplier === 1">+</span>
+                        <span v-else>-</span>
+                        {{ formatCurrency(movement.amount) }}
+                    </td>
+                    
+                    <td class="px-4 py-4 text-right text-gray-500">
+                        {{ formatCurrency(movement.balance) }}
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
+
+<style scoped>
+/* Colores dinámicos */
+.text-income {
+    color: #10B981; 
+    font-weight: 600;
+}
+
+.text-expense {
+    color: #111827;
+    font-weight: 600;
+}
+</style>

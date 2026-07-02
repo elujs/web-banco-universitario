@@ -7,30 +7,30 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       
       <div>
-        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">From</label>
+        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Desde</label>
         <input type="date" class="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors" />
       </div>
 
       <div>
-        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">To</label>
+        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Hasta</label>
         <input type="date" class="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors" />
       </div>
 
       <div>
-        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Type</label>
+        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Tipo</label>
         <select class="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors">
-          <option value="">All Transactions</option>
-          <option value="1">Credits (+)</option>
-          <option value="-1">Debits (-)</option>
+          <option value="">Todas las transacciones</option>
+          <option value="1">Créditos (+)</option>
+          <option value="-1">Débitos (-)</option>
         </select>
       </div>
 
       <div>
-        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Per Page</label>
+        <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Por página</label>
         <select class="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors">
-          <option value="10">10 rows</option>
-          <option value="20" selected>20 rows</option>
-          <option value="50">50 rows</option>
+          <option value="10">10 filas</option>
+          <option value="20" selected>20 filas</option>
+          <option value="50">50 filas</option>
         </select>
       </div>
 
@@ -38,7 +38,7 @@
 
     <div class="mt-4">
       <button class="text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors">
-        Clear filters
+        Aplicar filtros
       </button>
     </div>
   </div>
