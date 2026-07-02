@@ -106,9 +106,7 @@
                 >
                   <option value="">Selecciona un tipo</option>
                   <option value="estudiante">Estudiante</option>
-                  <option value="profesor">Profesor</option>
-                  <option value="administrativo">Administrativo</option>
-                  <option value="externo">Externo</option>
+                  
                 </select>
                 <p v-if="errors.tipoUsuario" class="text-red-600 text-sm mt-1">{{ errors.tipoUsuario }}</p>
               </div>
