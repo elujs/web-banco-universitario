@@ -1,9 +1,9 @@
 <script setup>
-// Recibimos los movimientos como una prop
+// Recibimos los movimientos desde el padre
 defineProps({
   movements: {
     type: Array,
-    required: true
+    default: () => []
   }
 });
 </script>

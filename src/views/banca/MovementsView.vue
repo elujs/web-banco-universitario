@@ -1,22 +1,24 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-// Importamos tus componentes actuales
+import { getMovements } from '@/services/movementService';
 import MovementFilters from '@/components/banca/movements/MovementFilters.vue';
 import MovementTable from '@/components/banca/movements/MovementTable.vue';
-// Importamos la función de servicio que creamos
-import { getMovements } from '@/services/movementService';
 
+// Referencia reactiva para almacenar los movimientos
 const movements = ref([]);
 
-onMounted(async () => {
+// Función para cargar los datos desde la API
+const loadMovements = async () => {
     try {
-        // Llamamos al backend y guardamos el resultado
         const { data } = await getMovements();
+        // Asignamos el array de datos que viene del backend
         movements.value = data.data; 
     } catch (error) {
         console.error("Error al cargar movimientos:", error);
     }
-});
+};
+
+onMounted(loadMovements);
 </script>
 
 <template>
