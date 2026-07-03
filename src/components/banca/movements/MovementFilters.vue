@@ -56,7 +56,7 @@ const applyFilters = () => {
     </div>
 
     <div class="mt-4">
-      <button @click="applyFilters" class="text-sm text-blue-600 hover:text-blue-800 font-medium transition-colors">
+      <button @click="applyFilters" class="text-sm text-[#085F63] hover:text-[#085F63] font-extrabold transition-colors">
         Aplicar filtros
       </button>
     </div>

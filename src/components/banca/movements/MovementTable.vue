@@ -52,6 +52,11 @@ const goToPage = (page) => {
             </thead>
             
             <tbody class="text-sm text-gray-700">
+                <tr v-if="movements.length === 0">
+    <td colspan="5" class="px-4 py-8 text-center text-gray-500">
+        No hay transacciones registradas en este periodo.
+    </td>
+</tr>
                 <tr v-for="movement in movements" :key="movement.id" 
                     @click="emit('row-click', movement)"
                     class="border-b border-gray-50 hover:bg-gray-50 transition-colors cursor-pointer">
@@ -97,7 +102,7 @@ const goToPage = (page) => {
                     </svg>
                 </button>
                 
-                <button class="w-8 h-8 flex items-center justify-center rounded-full bg-[#10B981] text-white font-medium shadow-sm">
+                <button class="w-8 h-8 flex items-center justify-center rounded-full bg-[#085F63] text-white font-medium shadow-sm">
                     {{ currentPage }}
                 </button>
                 
@@ -117,7 +122,7 @@ const goToPage = (page) => {
 <style scoped>
 /* Colores dinámicos */
 .text-income {
-    color: #10B981; 
+    color: #085F63; 
     font-weight: 600;
 }
 
