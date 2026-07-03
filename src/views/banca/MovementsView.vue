@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 import { getMovements } from '@/services/movementService';
 import MovementFilters from '@/components/banca/movements/MovementFilters.vue';
 import MovementTable from '@/components/banca/movements/MovementTable.vue';
+import MovementModal from '@/components/banca/movements/MovementModal.vue';
 
 // Variables que controlan toda la pantalla
 const movements = ref([]);
@@ -11,12 +12,15 @@ const currentPage = ref(1);
 const pageSize = ref(20);
 const currentFilters = ref({});
 
+// Variables para el modal
+const isModalOpen = ref(false);
+const selectedMovement = ref(null);
+
 // Función central que busca los datos
 const loadMovements = async () => {
     try {
         const { data } = await getMovements(currentPage.value, pageSize.value, currentFilters.value);
         movements.value = data.data || [];
-        // NOTA: Si el backend de Go no devuelve el 'total', usamos el largo del array para no romper la visual.
         totalItems.value = data.total || movements.value.length || 0; 
     } catch (error) {
         console.error("Error al cargar movimientos:", error);
@@ -37,8 +41,20 @@ const handlePageChange = (newPage) => {
     loadMovements();
 };
 
+// Escucha cuando el usuario hace clic en una fila de la tabla
+const handleRowClick = (movement) => {
+    selectedMovement.value = movement;
+    isModalOpen.value = true;
+};
+
+// Escucha cuando el usuario cierra el modal
+const handleCloseModal = () => {
+    isModalOpen.value = false;
+    setTimeout(() => { selectedMovement.value = null; }, 300); // Pequeño retraso para que la animación de cierre se vea suave
+};
+
 onMounted(async () => {
-    // Tu token temporal para que funcione (mantén el tuyo aquí si es diferente)
+    // Token temporal para pruebas locales
     localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX3R5cGUiOiJjbGllbnQifQ.dznytO5M8cU-23bXGwu1EcO3kL2ZolJuKhw_GY2k_4Q');
     await loadMovements();
 });
@@ -56,6 +72,13 @@ onMounted(async () => {
             :page-size="pageSize"
             :total-items="totalItems"
             @change-page="handlePageChange"
+            @row-click="handleRowClick"
+        />
+
+        <MovementModal 
+            :is-open="isModalOpen" 
+            :movement="selectedMovement" 
+            @close="handleCloseModal" 
         />
     </div>
 </template>

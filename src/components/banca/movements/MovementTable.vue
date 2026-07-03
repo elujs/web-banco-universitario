@@ -8,9 +8,9 @@ const props = defineProps({
     pageSize: { type: Number, default: 20 }
 });
 
-const emit = defineEmits(['change-page']);
+// Agregamos 'row-click' a la lista de eventos que emite este componente
+const emit = defineEmits(['change-page', 'row-click']);
 
-// Funciones reales restauradas
 const formatDate = (dateString) => {
     if (!dateString) return '';
     const date = new Date(dateString);
@@ -29,7 +29,6 @@ const formatCurrency = (amount) => {
     }).format(amount);
 };
 
-// Lógica de Paginación
 const totalPages = computed(() => Math.ceil(props.totalItems / props.pageSize) || 1);
 
 const goToPage = (page) => {
@@ -53,7 +52,9 @@ const goToPage = (page) => {
             </thead>
             
             <tbody class="text-sm text-gray-700">
-                <tr v-for="movement in movements" :key="movement.id" class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+                <tr v-for="movement in movements" :key="movement.id" 
+                    @click="emit('row-click', movement)"
+                    class="border-b border-gray-50 hover:bg-gray-50 transition-colors cursor-pointer">
                     
                     <td class="px-4 py-4 text-gray-400">
                         #{{ movement.id }}
@@ -80,35 +81,36 @@ const goToPage = (page) => {
                 </tr>
             </tbody>
         </table>
+        
         <div class="flex items-center justify-between pt-6 mt-2 border-t border-gray-100">
-                <span class="text-sm text-gray-500">
-                    Mostrando {{ (currentPage - 1) * pageSize + 1 }}-{{ Math.min(currentPage * pageSize, totalItems) }} de {{ totalItems }}
-                </span>
+            <span class="text-sm text-gray-500">
+                Mostrando {{ (currentPage - 1) * pageSize + 1 }}-{{ Math.min(currentPage * pageSize, totalItems) }} de {{ totalItems }}
+            </span>
+            
+            <div class="flex items-center space-x-1">
+                <button 
+                    @click="goToPage(currentPage - 1)"
+                    :disabled="currentPage === 1"
+                    class="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
                 
-                <div class="flex items-center space-x-1">
-                    <button 
-                        @click="goToPage(currentPage - 1)"
-                        :disabled="currentPage === 1"
-                        class="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                    </button>
-                    
-                    <button class="w-8 h-8 flex items-center justify-center rounded-full bg-[#10B981] text-white font-medium shadow-sm">
-                        {{ currentPage }}
-                    </button>
-                    
-                    <button 
-                        @click="goToPage(currentPage + 1)"
-                        :disabled="currentPage === totalPages"
-                        class="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </button>
-                </div>
+                <button class="w-8 h-8 flex items-center justify-center rounded-full bg-[#10B981] text-white font-medium shadow-sm">
+                    {{ currentPage }}
+                </button>
+                
+                <button 
+                    @click="goToPage(currentPage + 1)"
+                    :disabled="currentPage === totalPages"
+                    class="w-8 h-8 flex items-center justify-center rounded-full text-gray-400 hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
             </div>
+        </div>
     </div>
 </template>
 
