@@ -19,9 +19,24 @@ const selectedMovement = ref(null);
 // Función central que busca los datos
 const loadMovements = async () => {
     try {
-        const { data } = await getMovements(currentPage.value, pageSize.value, currentFilters.value);
-        movements.value = data.data || [];
-        totalItems.value = data.total || movements.value.length || 0; 
+        const { data } = await getMovements(currentPage.value, pageSize.value, {}); // Enviamos filtros vacíos al back
+        
+        let movementsList = data.data || [];
+
+        // --- Filtro en el Frontend ---
+        if (currentFilters.value.fromDate) {
+            movementsList = movementsList.filter(m => m.created_at >= currentFilters.value.fromDate);
+        }
+        if (currentFilters.value.toDate) {
+            movementsList = movementsList.filter(m => m.created_at <= currentFilters.value.toDate);
+        }
+        if (currentFilters.value.multiplier) {
+            movementsList = movementsList.filter(m => m.multiplier == currentFilters.value.multiplier);
+        }
+        // -----------------------------
+
+        movements.value = movementsList;
+        totalItems.value = data.total || movementsList.length || 0; 
     } catch (error) {
         console.error("Error al cargar movimientos:", error);
     }

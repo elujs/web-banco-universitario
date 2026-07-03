@@ -1,20 +1,22 @@
 <script setup>
 import { ref } from 'vue';
 
-// Definimos el evento que vamos a disparar hacia el componente padre
+// Le decimos a Vue que este componente puede emitir un evento llamado 'apply-filters'
 const emit = defineEmits(['apply-filters']);
 
-// Variables reactivas para guardar las opciones del usuario
+// Calculamos la fecha de hoy para bloquear el calendario (Ej: "2026-07-02")
+const today = new Date().toISOString().split('T')[0];
+
+// Estas variables reactivas atrapan lo que el usuario selecciona
 const filters = ref({
   fromDate: '',
   toDate: '',
   multiplier: '',
-  pageSize: 20 // Valor por defecto
+  pageSize: 20
 });
 
-// Función que se dispara al hacer clic en el botón
+// Función que se ejecuta al darle clic al botón
 const applyFilters = () => {
-  // Emitimos el evento pasándole un clon de nuestros filtros
   emit('apply-filters', { ...filters.value });
 };
 </script>
@@ -25,12 +27,12 @@ const applyFilters = () => {
       
       <div>
         <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Desde</label>
-        <input v-model="filters.fromDate" type="date" class="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors" />
+        <input v-model="filters.fromDate" type="date" :max="today" class="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors" />
       </div>
 
       <div>
         <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Hasta</label>
-        <input v-model="filters.toDate" type="date" class="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors" />
+        <input v-model="filters.toDate" type="date" :max="today" class="w-full px-4 py-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 transition-colors" />
       </div>
 
       <div>
