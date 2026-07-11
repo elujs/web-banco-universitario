@@ -229,7 +229,7 @@ const handleLogin = async () => {
   isLoading.value = true
 
   try {
-    const response = await fetch('http://localhost:3000/v1/public/client/user/login', {
+    const response = await fetch('/v1/public/client/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
