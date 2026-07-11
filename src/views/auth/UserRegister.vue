@@ -86,11 +86,11 @@
 
             <div class="grid gap-5 md:grid-cols-2">
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="fechaNacimiento">Fecha de nacimiento</label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="fechaNacimiento">Fecha y hora de nacimiento</label>
                 <input
                   id="fechaNacimiento"
                   v-model="fechaNacimiento"
-                  type="date"
+                  type="datetime-local"
                   :class="inputClass(errors.fechaNacimiento)"
                   class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
@@ -293,9 +293,27 @@ function validate() {
   return valid
 }
 
+function formatFechaNacimiento(value) {
+  if (!value) return ''
+  return `${value}:00Z`
+}
+
+
 function onSubmit() {
   if (!validate()) return
-  // Aquí solo mostramos confirmación: la lógica de envío real no está implementada.
+
+  const payload = {
+    nombre: nombre.value,
+    apellido: apellido.value,
+    email: email.value,
+    telefono: telefono.value,
+    fechaNacimiento: formatFechaNacimiento(fechaNacimiento.value),
+    tipoUsuario: tipoUsuario.value,
+    documento: documento.value,
+    contrasena: contrasena.value
+  }
+
+  console.log(payload)
   alert('Formulario válido. Implementa la lógica de envío según tu backend.')
 }
 
