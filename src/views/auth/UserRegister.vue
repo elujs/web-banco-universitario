@@ -73,8 +73,9 @@
                 <input
                   id="telefono"
                   v-model="telefono"
-                  @input="onNumberInput($event,'telefono')"
-                  inputmode="numeric"
+                  @input="onPhoneInput($event,'telefono')"
+                  type="tel"
+                  inputmode="tel"
                   placeholder="+58 412 123 4567"
                   :class="inputClass(errors.telefono)"
                   class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
@@ -120,7 +121,7 @@
                   v-model="documento"
                   @input="onNumberInput($event,'documento')"
                   inputmode="numeric"
-                  placeholder="V-12345678"
+                  placeholder="12345678"
                   :class="inputClass(errors.documento)"
                   class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
@@ -235,8 +236,25 @@ function sanitizeNumberInput(value) {
 
 function onNumberInput(e, field) {
   const clean = sanitizeNumberInput(e.target.value)
-  if (field === 'telefono') telefono.value = clean
-  else if (field === 'documento') documento.value = clean
+  if (field === 'documento') documento.value = clean
+  e.target.value = clean
+}
+
+function sanitizePhoneInput(value) {
+  let clean = (value || '').replace(/[^0-9+]/g, '')
+
+  if (clean.startsWith('+')) {
+    clean = '+' + clean.slice(1).replace(/\+/g, '')
+  } else {
+    clean = clean.replace(/\+/g, '')
+  }
+
+  return clean
+}
+
+function onPhoneInput(e) {
+  const clean = sanitizePhoneInput(e.target.value)
+  telefono.value = clean
   e.target.value = clean
 }
 
