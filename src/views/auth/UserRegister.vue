@@ -95,23 +95,6 @@
             </div>
 
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2" for="tipoUsuario">Tipo de usuario</label>
-              <select
-                id="tipoUsuario"
-                v-model="tipoUsuario"
-                :class="inputClass(errors.tipoUsuario)"
-                class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
-              >
-                <option value="">Selecciona un tipo</option>
-                <option value="estudiante">Estudiante</option>
-                <option value="profesor">Profesor</option>
-                <option value="administrativo">Administrativo</option>
-                <option value="externo">Externo</option>
-              </select>
-            <p v-if="errors.tipoUsuario" class="text-red-600 text-sm mt-1">{{ errors.tipoUsuario }}</p>
-            </div>
-
-            <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2" for="documento">Nº de documento</label>
               <input
                 id="documento"
@@ -198,7 +181,6 @@ const apellido = ref('')
 const email = ref('')
 const telefono = ref('')
 const fechaNacimiento = ref('')
-const tipoUsuario = ref('')
 const documento = ref('')
 const contrasena = ref('')
 const confirmarContrasena = ref('')
@@ -284,7 +266,6 @@ function validate() {
   else if (!validateEmail(email.value)) { errors.email = 'Correo inválido'; valid = false }
   if (!telefono.value.trim()) { errors.telefono = 'Falta el teléfono'; valid = false }
   if (!fechaNacimiento.value) { errors.fechaNacimiento = 'Falta la fecha de nacimiento'; valid = false }
-  if (!tipoUsuario.value) { errors.tipoUsuario = 'Selecciona un tipo de usuario'; valid = false }
   if (!documento.value.trim()) { errors.documento = 'Falta el número de documento'; valid = false }
   if (!contrasena.value) { errors.contrasena = 'Falta la contraseña'; valid = false }
   if (!confirmarContrasena.value) { errors.confirmarContrasena = 'Confirma la contraseña'; valid = false }
