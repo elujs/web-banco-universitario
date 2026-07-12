@@ -268,6 +268,7 @@ function validate() {
   if (!fechaNacimiento.value) { errors.fechaNacimiento = 'Falta la fecha de nacimiento'; valid = false }
   if (!documento.value.trim()) { errors.documento = 'Falta el número de documento'; valid = false }
   if (!contrasena.value) { errors.contrasena = 'Falta la contraseña'; valid = false }
+  else if (contrasena.value.length < 8) { errors.contrasena = 'La contraseña debe tener al menos 8 caracteres'; valid = false }
   if (!confirmarContrasena.value) { errors.confirmarContrasena = 'Confirma la contraseña'; valid = false }
   if (contrasena.value && confirmarContrasena.value && contrasena.value !== confirmarContrasena.value) {
     errors.confirmarContrasena = 'Las contraseñas no coinciden'
