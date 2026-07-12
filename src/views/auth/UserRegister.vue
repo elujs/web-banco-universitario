@@ -21,6 +21,8 @@
           <div class="mb-8">
             <h1 class="text-2xl font-bold text-gray-900">Crear nueva cuenta</h1>
             <p class="text-gray-600 mt-2">Ingresa los datos del usuario para completar el registro.</p>
+            <p v-if="successMessage" class="text-green-600 mt-3">{{ successMessage }}</p>
+            <p v-if="errorMessage" class="text-red-600 mt-3">{{ errorMessage }}</p>
           </div>
 
           <form class="space-y-5" @submit.prevent="onSubmit">
@@ -165,9 +167,10 @@
 
             <button
               type="submit"
+              :disabled="isLoading"
               class="w-full bg-[#085F63] hover:bg-[#0a7a7f] text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-300"
             >
-              Crear usuario
+              {{ isLoading ? 'Creando usuario...' : 'Crear usuario' }}
             </button>
 
             <button
@@ -212,6 +215,9 @@ const errors = reactive({
   confirmarContrasena: ''
 })
 
+const errorMessage = ref('')
+const successMessage = ref('')
+const isLoading = ref(false)
 const showPassword = ref(false)
 const showConfirmPassword = ref(false)
 
@@ -296,8 +302,13 @@ function formatFechaNacimiento(value) {
 }
 
 
-function onSubmit() {
+async function onSubmit() {
+  if (isLoading.value) return
   if (!validate()) return
+
+  errorMessage.value = ''
+  successMessage.value = ''
+  isLoading.value = true
 
   const payload = {
     nombre: nombre.value,
@@ -310,8 +321,34 @@ function onSubmit() {
     contrasena: contrasena.value
   }
 
-  console.log(payload)
-  alert('Formulario válido. Implementa la lógica de envío según tu backend.')
+  try {
+    const response = await fetch('/v1/public/client/user/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es'
+      },
+      body: JSON.stringify(payload)
+    })
+
+    const result = await response.json()
+
+    if (!response.ok) {
+      throw new Error(result.message || 'Error al crear el usuario')
+    }
+
+    successMessage.value = 'Usuario creado correctamente. Redirigiendo al inicio de sesión...'
+    setTimeout(() => router.push('/login'), 1200)
+  } catch (error) {
+    if (error.message === 'Failed to fetch') {
+      errorMessage.value =
+        'No se pudo conectar con el servidor. Verifica que la API esté en ejecución en localhost:3000.'
+    } else {
+      errorMessage.value = error.message || 'Ocurrió un error al registrar el usuario.'
+    }
+  } finally {
+    isLoading.value = false
+  }
 }
 
 function goHome() {
