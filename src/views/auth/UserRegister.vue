@@ -73,8 +73,9 @@
                 <input
                   id="telefono"
                   v-model="telefono"
-                  @input="onNumberInput($event,'telefono')"
-                  inputmode="numeric"
+                  @input="onPhoneInput($event,'telefono')"
+                  type="tel"
+                  inputmode="tel"
                   placeholder="+58 412 123 4567"
                   :class="inputClass(errors.telefono)"
                   class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
@@ -85,11 +86,11 @@
 
             <div class="grid gap-5 md:grid-cols-2">
               <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="fechaNacimiento">Fecha de nacimiento</label>
+                <label class="block text-sm font-semibold text-gray-700 mb-2" for="fechaNacimiento">Fecha y hora de nacimiento</label>
                 <input
                   id="fechaNacimiento"
                   v-model="fechaNacimiento"
-                  type="date"
+                  type="datetime-local"
                   :class="inputClass(errors.fechaNacimiento)"
                   class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
@@ -120,7 +121,7 @@
                   v-model="documento"
                   @input="onNumberInput($event,'documento')"
                   inputmode="numeric"
-                  placeholder="V-12345678"
+                  placeholder="12345678"
                   :class="inputClass(errors.documento)"
                   class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
@@ -235,8 +236,25 @@ function sanitizeNumberInput(value) {
 
 function onNumberInput(e, field) {
   const clean = sanitizeNumberInput(e.target.value)
-  if (field === 'telefono') telefono.value = clean
-  else if (field === 'documento') documento.value = clean
+  if (field === 'documento') documento.value = clean
+  e.target.value = clean
+}
+
+function sanitizePhoneInput(value) {
+  let clean = (value || '').replace(/[^0-9+]/g, '')
+
+  if (clean.startsWith('+')) {
+    clean = '+' + clean.slice(1).replace(/\+/g, '')
+  } else {
+    clean = clean.replace(/\+/g, '')
+  }
+
+  return clean
+}
+
+function onPhoneInput(e) {
+  const clean = sanitizePhoneInput(e.target.value)
+  telefono.value = clean
   e.target.value = clean
 }
 
@@ -275,9 +293,27 @@ function validate() {
   return valid
 }
 
+function formatFechaNacimiento(value) {
+  if (!value) return ''
+  return `${value}:00Z`
+}
+
+
 function onSubmit() {
   if (!validate()) return
-  // Aquí solo mostramos confirmación: la lógica de envío real no está implementada.
+
+  const payload = {
+    nombre: nombre.value,
+    apellido: apellido.value,
+    email: email.value,
+    telefono: telefono.value,
+    fechaNacimiento: formatFechaNacimiento(fechaNacimiento.value),
+    tipoUsuario: tipoUsuario.value,
+    documento: documento.value,
+    contrasena: contrasena.value
+  }
+
+  console.log(payload)
   alert('Formulario válido. Implementa la lógica de envío según tu backend.')
 }
 
