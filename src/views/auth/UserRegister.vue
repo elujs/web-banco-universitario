@@ -311,14 +311,14 @@ async function onSubmit() {
   isLoading.value = true
 
   const payload = {
-    nombre: nombre.value,
-    apellido: apellido.value,
+    first_name: nombre.value,
+    last_name: apellido.value,
+    document_number: documento.value,
+    birth_date: formatFechaNacimiento(fechaNacimiento.value),
+    phone_number: telefono.value,
     email: email.value,
-    telefono: telefono.value,
-    fechaNacimiento: formatFechaNacimiento(fechaNacimiento.value),
-    tipoUsuario: tipoUsuario.value,
-    documento: documento.value,
-    contrasena: contrasena.value
+    
+    password: contrasena.value
   }
 
   try {
