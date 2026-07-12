@@ -24,9 +24,8 @@
           </div>
 
           <form class="space-y-5" @submit.prevent="onSubmit">
-            <div class="grid gap-5 md:grid-cols-2">
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="nombre">Nombre</label>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" for="nombre">Nombre</label>
                 <input
                   id="nombre"
                   v-model="nombre"
@@ -37,10 +36,10 @@
                   class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
                 <p v-if="errors.nombre" class="text-red-600 text-sm mt-1">{{ errors.nombre }}</p>
-              </div>
+            </div>
 
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="apellido">Apellido</label>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" for="apellido">Apellido</label>
                 <input
                   id="apellido"
                   v-model="apellido"
@@ -51,25 +50,23 @@
                   class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
                 <p v-if="errors.apellido" class="text-red-600 text-sm mt-1">{{ errors.apellido }}</p>
-              </div>
             </div>
 
-            <div class="grid gap-5 md:grid-cols-2">
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="email">Correo electrónico</label>
-                <input
-                  id="email"
-                  v-model="email"
-                  type="email"
-                  placeholder="usuario@correo.com"
-                  :class="inputClass(errors.email)"
-                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
-                />
-                <p v-if="errors.email" class="text-red-600 text-sm mt-1">{{ errors.email }}</p>
-              </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" for="email">Correo electrónico</label>
+              <input
+                id="email"
+                v-model="email"
+                type="email"
+                placeholder="usuario@correo.com"
+                :class="inputClass(errors.email)"
+                class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
+              />
+              <p v-if="errors.email" class="text-red-600 text-sm mt-1">{{ errors.email }}</p>
+            </div>
 
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="telefono">Teléfono</label>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" for="telefono">Teléfono</label>
                 <input
                   id="telefono"
                   v-model="telefono"
@@ -78,15 +75,13 @@
                   inputmode="tel"
                   placeholder="+58 412 123 4567"
                   :class="inputClass(errors.telefono)"
-                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
+                class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
                 <p v-if="errors.telefono" class="text-red-600 text-sm mt-1">{{ errors.telefono }}</p>
-              </div>
             </div>
 
-            <div class="grid gap-5 md:grid-cols-2">
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="fechaNacimiento">Fecha y hora de nacimiento</label>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" for="fechaNacimiento">Fecha y hora de nacimiento</label>
                 <input
                   id="fechaNacimiento"
                   v-model="fechaNacimiento"
@@ -94,90 +89,92 @@
                   :class="inputClass(errors.fechaNacimiento)"
                   class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
-                <p v-if="errors.fechaNacimiento" class="text-red-600 text-sm mt-1">{{ errors.fechaNacimiento }}</p>
-              </div>
-
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="tipoUsuario">Tipo de usuario</label>
-                <select
-                  id="tipoUsuario"
-                  v-model="tipoUsuario"
-                  :class="inputClass(errors.tipoUsuario)"
-                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
-                >
-                  <option value="">Selecciona un tipo</option>
-                  <option value="estudiante">Estudiante</option>
-                  
-                </select>
-                <p v-if="errors.tipoUsuario" class="text-red-600 text-sm mt-1">{{ errors.tipoUsuario }}</p>
-              </div>
+              <p v-if="errors.fechaNacimiento" class="text-red-600 text-sm mt-1">{{ errors.fechaNacimiento }}</p>
             </div>
 
-            <div class="grid gap-5 md:grid-cols-2">
-              <div>
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="documento">Nº de documento</label>
-                <input
-                  id="documento"
-                  v-model="documento"
-                  @input="onNumberInput($event,'documento')"
-                  inputmode="numeric"
-                  placeholder="12345678"
-                  :class="inputClass(errors.documento)"
-                  class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
-                />
-                <p v-if="errors.documento" class="text-red-600 text-sm mt-1">{{ errors.documento }}</p>
-              </div>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" for="tipoUsuario">Tipo de usuario</label>
+              <select
+                id="tipoUsuario"
+                v-model="tipoUsuario"
+                :class="inputClass(errors.tipoUsuario)"
+                class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
+              >
+                <option value="">Selecciona un tipo</option>
+                <option value="estudiante">Estudiante</option>
+                <option value="profesor">Profesor</option>
+                <option value="administrativo">Administrativo</option>
+                <option value="externo">Externo</option>
+              </select>
+            <p v-if="errors.tipoUsuario" class="text-red-600 text-sm mt-1">{{ errors.tipoUsuario }}</p>
             </div>
 
-              <div class="relative">
-                <label class="block text-sm font-semibold text-gray-700 mb-2" for="contrasena">
-                  Contraseña
-                </label>
+            <div>
+              <label class="block text-sm font-semibold text-gray-700 mb-2" for="documento">Nº de documento</label>
+              <input
+                id="documento"
+                v-model="documento"
+                @input="onNumberInput($event,'documento')"
+                inputmode="numeric"
+                placeholder="12345678"
+                :class="inputClass(errors.documento)"
+                class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
+              />
+            <p v-if="errors.documento" class="text-red-600 text-sm mt-1">{{ errors.documento }}</p>
+            </div>
+
+            <div class="relative">
+              <label class="block text-sm font-semibold text-gray-700 mb-2" for="contrasena">Contraseña</label>
+              <input
+                id="contrasena"
+                v-model="contrasena"
+                :type="showPassword ? 'text' : 'password'"
+                placeholder="••••••••"
+                :class="inputClass(errors.contrasena)"
+                class="w-full pr-24 px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
+              />
+              <button
+                type="button"
+                class="absolute right-3 top-[calc(50%+0.7rem)] -translate-y-1/2 text-sm text-gray-600 hover:text-gray-900"
+                @click="togglePassword('contrasena')"
+              >
+                {{ showPassword ? 'Ocultar' : 'Mostrar' }}
+              </button>
+                <p v-if="errors.contrasena" class="text-red-600 text-sm mt-1">{{ errors.contrasena }}</p>
+            </div>
+
+            <div class="relative">
+              <label class="block text-sm font-semibold text-gray-700 mb-2" for="confirmarContrasena">Confirmar contraseña</label>
                 <input
-                  id="contrasena"
-                  v-model="contrasena"
-                  :type="showPassword ? 'text' : 'password'"
+                  id="confirmarContrasena"
+                  v-model="confirmarContrasena"
+                  :type="showConfirmPassword ? 'text' : 'password'"
                   placeholder="••••••••"
-                  :class="inputClass(errors.contrasena)"
+                  :class="inputClass(errors.confirmarContrasena)"
                   class="w-full pr-24 px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
-                <button
-                  type="button"
-                  class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-600 hover:text-gray-900"
-                  @click="togglePassword('contrasena')"
-                >
-                  {{ showPassword ? 'Ocultar' : 'Mostrar' }}
-                </button>
-                <p v-if="errors.contrasena" class="text-red-600 text-sm mt-1">{{ errors.contrasena }}</p>
-              </div>
+              <button
+                type="button"
+                class="absolute right-3 top-[calc(50%+0.7rem)] -translate-y-1/2 text-sm text-gray-600 hover:text-gray-900"
+                @click="togglePassword('confirmarContrasena')"
+              >
+                {{ showConfirmPassword ? 'Ocultar' : 'Mostrar' }}
+              </button>
+              <p v-if="errors.confirmarContrasena" class="text-red-600 text-sm mt-1">{{ errors.confirmarContrasena }}</p>
+            </div>
 
-          <div class="relative">
-            <label class="block text-sm font-semibold text-gray-700 mb-2" for="confirmarContrasena">
-              Confirmar contraseña
-            </label>
-            <input
-              id="confirmarContrasena"
-              v-model="confirmarContrasena"
-              :type="showConfirmPassword ? 'text' : 'password'"
-              placeholder="••••••••"
-              :class="inputClass(errors.confirmarContrasena)"
-              class="w-full pr-24 px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
-            />
             <button
-              type="button"
-              class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-600 hover:text-gray-900"
-              @click="togglePassword('confirmarContrasena')"
+              type="submit"
+              class="w-full bg-[#085F63] hover:bg-[#0a7a7f] text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-300"
             >
-              {{ showConfirmPassword ? 'Ocultar' : 'Mostrar' }}
-            </button>
-            <p v-if="errors.confirmarContrasena" class="text-red-600 text-sm mt-1">{{ errors.confirmarContrasena }}</p>
-          </div>
-
-            <button type="submit" class="w-full bg-[#085F63] hover:bg-[#0a7a7f] text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-300">
               Crear usuario
             </button>
 
-            <button @click="goHome" type="button" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold px-6 py-3 rounded-2xl transition-all duration-300">
+            <button
+              @click="goHome"
+              type="button"
+              class="w-full bg-gray-200 hover:bg-gray-300 text-gray-900 font-semibold px-6 py-3 rounded-2xl transition-all duration-300"
+            >
               Volver al inicio
             </button>
           </form>
