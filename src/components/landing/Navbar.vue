@@ -24,7 +24,7 @@
 
       <div class="flex items-center gap-3">
         <button
-          @click="$router.push('/banca')"
+          @click="$router.push('/login')"
           class="text-gray-700 hover:text-[#085F63] border border-gray-300 hover:border-[#085F63] px-5 py-2 rounded-full transition-all duration-300 text-sm font-medium whitespace-nowrap"
         >
           Iniciar Sesión
@@ -33,7 +33,7 @@
           @click="$router.push('/register')"
           class="bg-[#085F63] hover:bg-[#0a7a7f] text-white px-6 py-2 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-[#085F63]/30 text-sm font-semibold whitespace-nowrap"
         >
-          registrarse
+          Registrarse
         </button>
       </div>
     </div>
@@ -76,16 +76,16 @@
 
         <div class="flex flex-col space-y-3 pt-4 border-t border-gray-100">
           <button
-            @click="$router.push('/banca')"
+            @click="$router.push('/login')"
             class="text-gray-700 hover:text-[#085F63] border border-gray-300 hover:border-[#085F63] py-3 px-4 rounded-full font-medium w-full"
           >
             Iniciar Sesión
           </button>
           <button
-            @click="$router.push('/registerS')"
+            @click="$router.push('/register')"
             class="bg-[#085F63] hover:bg-[#0a7a7f] text-white py-3 px-4 rounded-full font-semibold w-full"
           >
-            registrarse
+            Registrarse
           </button>
         </div>
       </div>
