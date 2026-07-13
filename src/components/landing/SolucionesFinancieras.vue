@@ -1,7 +1,6 @@
 <template>
-  <section id="soluciones" class="py-20 bg-gray-50 font-sans">
+  <section id="soluciones" class="py-10 md:py-16 bg-gray-50 font-sans">
     <div class="max-w-7xl mx-auto px-6">
-      
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-extrabold text-[#085F63] mb-4 tracking-tight">
           Soluciones financieras ágiles y eficientes
@@ -29,7 +28,6 @@
           </p>
         </article>
       </div>
-
     </div>
   </section>
 </template>
@@ -41,18 +39,21 @@ import { ref } from 'vue'
 const soluciones = ref([
   {
     title: 'Transferencias sin comisión',
-    description: 'Envía dinero a otros estudiantes o a cualquier cuenta sin pagar comisiones. Instantáneo y seguro.',
+    description:
+      'Envía dinero a otros estudiantes o a cualquier cuenta sin pagar comisiones. Instantáneo y seguro.',
     icon: ArrowLeftRight,
   },
   {
     title: 'Pago de matrícula',
-    description: 'Paga tu matrícula directamente desde la app con recordatorios automáticos y facilidades de pago.',
+    description:
+      'Paga tu matrícula directamente desde la app con recordatorios automáticos y facilidades de pago.',
     icon: GraduationCap,
   },
   {
     title: 'Cobro de becas',
-    description: 'Recibe tus becas de forma automática sin trámites complicados. Depósito directo y sin demoras.',
+    description:
+      'Recibe tus becas de forma automática sin trámites complicados. Depósito directo y sin demoras.',
     icon: BadgePercent,
-  }
+  },
 ])
 </script>
