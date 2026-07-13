@@ -21,6 +21,8 @@
           <div class="mb-8">
             <h1 class="text-2xl font-bold text-gray-900">Crear nueva cuenta</h1>
             <p class="text-gray-600 mt-2">Ingresa los datos del usuario para completar el registro.</p>
+            <p v-if="successMessage" class="text-green-600 mt-3">{{ successMessage }}</p>
+            <p v-if="errorMessage" class="text-red-600 mt-3">{{ errorMessage }}</p>
           </div>
 
           <form class="space-y-5" @submit.prevent="onSubmit">
@@ -93,23 +95,6 @@
             </div>
 
             <div>
-              <label class="block text-sm font-semibold text-gray-700 mb-2" for="tipoUsuario">Tipo de usuario</label>
-              <select
-                id="tipoUsuario"
-                v-model="tipoUsuario"
-                :class="inputClass(errors.tipoUsuario)"
-                class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
-              >
-                <option value="">Selecciona un tipo</option>
-                <option value="estudiante">Estudiante</option>
-                <option value="profesor">Profesor</option>
-                <option value="administrativo">Administrativo</option>
-                <option value="externo">Externo</option>
-              </select>
-            <p v-if="errors.tipoUsuario" class="text-red-600 text-sm mt-1">{{ errors.tipoUsuario }}</p>
-            </div>
-
-            <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2" for="documento">Nº de documento</label>
               <input
                 id="documento"
@@ -165,9 +150,10 @@
 
             <button
               type="submit"
+              :disabled="isLoading"
               class="w-full bg-[#085F63] hover:bg-[#0a7a7f] text-white font-semibold px-6 py-3 rounded-2xl transition-all duration-300"
             >
-              Crear usuario
+              {{ isLoading ? 'Creando usuario...' : 'Crear usuario' }}
             </button>
 
             <button
@@ -195,7 +181,6 @@ const apellido = ref('')
 const email = ref('')
 const telefono = ref('')
 const fechaNacimiento = ref('')
-const tipoUsuario = ref('')
 const documento = ref('')
 const contrasena = ref('')
 const confirmarContrasena = ref('')
@@ -212,6 +197,9 @@ const errors = reactive({
   confirmarContrasena: ''
 })
 
+const errorMessage = ref('')
+const successMessage = ref('')
+const isLoading = ref(false)
 const showPassword = ref(false)
 const showConfirmPassword = ref(false)
 
@@ -278,9 +266,9 @@ function validate() {
   else if (!validateEmail(email.value)) { errors.email = 'Correo inválido'; valid = false }
   if (!telefono.value.trim()) { errors.telefono = 'Falta el teléfono'; valid = false }
   if (!fechaNacimiento.value) { errors.fechaNacimiento = 'Falta la fecha de nacimiento'; valid = false }
-  if (!tipoUsuario.value) { errors.tipoUsuario = 'Selecciona un tipo de usuario'; valid = false }
   if (!documento.value.trim()) { errors.documento = 'Falta el número de documento'; valid = false }
   if (!contrasena.value) { errors.contrasena = 'Falta la contraseña'; valid = false }
+  else if (contrasena.value.length < 8) { errors.contrasena = 'La contraseña debe tener al menos 8 caracteres'; valid = false }
   if (!confirmarContrasena.value) { errors.confirmarContrasena = 'Confirma la contraseña'; valid = false }
   if (contrasena.value && confirmarContrasena.value && contrasena.value !== confirmarContrasena.value) {
     errors.confirmarContrasena = 'Las contraseñas no coinciden'
@@ -296,22 +284,53 @@ function formatFechaNacimiento(value) {
 }
 
 
-function onSubmit() {
+async function onSubmit() {
+  if (isLoading.value) return
   if (!validate()) return
 
+  errorMessage.value = ''
+  successMessage.value = ''
+  isLoading.value = true
+
   const payload = {
-    nombre: nombre.value,
-    apellido: apellido.value,
+    first_name: nombre.value,
+    last_name: apellido.value,
+    document_number: documento.value,
+    birth_date: formatFechaNacimiento(fechaNacimiento.value),
+    phone_number: telefono.value,
     email: email.value,
-    telefono: telefono.value,
-    fechaNacimiento: formatFechaNacimiento(fechaNacimiento.value),
-    tipoUsuario: tipoUsuario.value,
-    documento: documento.value,
-    contrasena: contrasena.value
+    
+    password: contrasena.value
   }
 
-  console.log(payload)
-  alert('Formulario válido. Implementa la lógica de envío según tu backend.')
+  try {
+    const response = await fetch('/v1/public/client/user/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es'
+      },
+      body: JSON.stringify(payload)
+    })
+
+    const result = await response.json()
+
+    if (!response.ok) {
+      throw new Error(result.message || 'Error al crear el usuario')
+    }
+
+    successMessage.value = 'Usuario creado correctamente. Redirigiendo al inicio de sesión...'
+    setTimeout(() => router.push('/login'), 1200)
+  } catch (error) {
+    if (error.message === 'Failed to fetch') {
+      errorMessage.value =
+        'No se pudo conectar con el servidor. Verifica que la API esté en ejecución en localhost:3000.'
+    } else {
+      errorMessage.value = error.message || 'Ocurrió un error al registrar el usuario.'
+    }
+  } finally {
+    isLoading.value = false
+  }
 }
 
 function goHome() {
