@@ -70,9 +70,9 @@ const handleCloseModal = () => {
 };
 
 onMounted(async () => {
-    localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX3R5cGUiOiJjbGllbnQifQ.dznytO5M8cU-23bXGwu1EcO3kL2ZolJuKhw_GY2k_4Q');
     await loadMovements();
 });
+
 </script>
 
 <template>
