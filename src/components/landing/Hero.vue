@@ -1,7 +1,7 @@
 <template>
   <section
     id="inicio"
-    class="min-h-screen pt-28 pb-16 px-6 relative overflow-hidden bg-gradient-to-b from-gray-50 to-white font-sans"
+    class="min-h-screen pt-28 pb-8 md:pb-16 px-6 relative overflow-hidden bg-gradient-to-b from-gray-50 to-white font-sans"
   >
     <div class="container mx-auto">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -22,6 +22,7 @@
               class="flex-1 px-5 py-3 rounded-full bg-white border-2 border-gray-200 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#085F63] transition-all shadow-sm font-sans"
             />
             <button
+              @click="router.push('/register')"
               class="bg-[#085F63] hover:bg-[#0a7a7f] text-white px-6 py-3 rounded-full transition-all duration-300 flex items-center justify-center space-x-2 whitespace-nowrap font-sans"
             >
               <span class="font-semibold">Crear cuenta</span>
@@ -137,6 +138,9 @@
 
 <script setup>
 import { ArrowRight } from 'lucide-vue-next'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 </script>
 
 <style scoped></style>
