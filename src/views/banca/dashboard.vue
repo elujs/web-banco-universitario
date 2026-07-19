@@ -1,7 +1,10 @@
 <template>
   <div class="min-h-screen bg-slate-50 px-4 py-8 sm:px-6 lg:px-8">
-    <div class="mx-auto flex max-w-7xl flex-col gap-6 lg:flex-row">
-      <section class="flex-1 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div class="mx-auto max-w-7xl">
+      <AppHeader />
+
+      <div class="flex flex-col gap-6 lg:flex-row">
+        <section class="flex-1 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <p class="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-600">Panel del banco</p>
         <h1 class="mt-2 text-2xl font-semibold text-slate-900">Bienvenido a tu banca universitaria</h1>
         <p class="mt-3 max-w-2xl text-slate-600">
@@ -20,11 +23,13 @@
         </div>
       </section>
 
-      <Selector />
+        <Selector />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import AppHeader from '../../components/layout/AppHeader.vue'
 import Selector from '../../components/layout/selector.vue'
 </script>
