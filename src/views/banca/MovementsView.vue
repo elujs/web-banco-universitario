@@ -5,6 +5,7 @@ import AppHeader from '@/components/layout/AppHeader.vue'
 import MovementFilters from '@/components/banca/movements/MovementFilters.vue'
 import MovementTable from '@/components/banca/movements/MovementTable.vue'
 import MovementModal from '@/components/banca/movements/MovementModal.vue'
+import Selector from '@/components/layout/selector.vue'
 
 // Variables de estado
 const movements = ref([])
@@ -88,31 +89,37 @@ onMounted(async () => {
     <div class="max-w-7xl mx-auto space-y-6">
       <AppHeader />
 
-      <div>
-        <h1 class="text-3xl font-bold text-gray-900">Movimientos</h1>
-        <p class="text-gray-500">
-          Historial completo de transacciones filtrado por rango de fechas y tipo.
-        </p>
-      </div>
+      <div class="flex flex-col gap-6 lg:flex-row">
+        <div class="flex-1 space-y-6">
+          <div>
+            <h1 class="text-3xl font-bold text-gray-900">Movimientos</h1>
+            <p class="text-gray-500">
+              Historial completo de transacciones filtrado por rango de fechas y tipo.
+            </p>
+          </div>
 
-      <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-        <MovementFilters @apply-filters="handleFilters" />
-      </div>
+          <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+            <MovementFilters @apply-filters="handleFilters" />
+          </div>
 
-      <div v-if="isLoading" class="flex justify-center items-center py-20">
-        <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-[#085F63]"></div>
-        <span class="ml-3 text-gray-500">Cargando movimientos...</span>
-      </div>
+          <div v-if="isLoading" class="flex justify-center items-center py-20">
+            <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-[#085F63]"></div>
+            <span class="ml-3 text-gray-500">Cargando movimientos...</span>
+          </div>
 
-      <div v-else class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
-        <MovementTable
-          :movements="movements"
-          :current-page="currentPage"
-          :page-size="pageSize"
-          :total-items="totalItems"
-          @change-page="handlePageChange"
-          @row-click="handleRowClick"
-        />
+          <div v-else class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm">
+            <MovementTable
+              :movements="movements"
+              :current-page="currentPage"
+              :page-size="pageSize"
+              :total-items="totalItems"
+              @change-page="handlePageChange"
+              @row-click="handleRowClick"
+            />
+          </div>
+        </div>
+
+        <Selector />
       </div>
 
       <MovementModal
