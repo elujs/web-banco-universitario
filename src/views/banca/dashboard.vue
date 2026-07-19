@@ -30,8 +30,11 @@
 
         <div class="mt-8 grid gap-4 md:grid-cols-2">
           <article class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <h2 class="font-semibold text-slate-800">Resumen rápido</h2>
-            <p class="mt-2 text-sm text-slate-600">Consulta tu información principal desde un solo lugar.</p>
+            <h2 class="font-semibold text-slate-800">Número de cuenta</h2>
+            <p class="mt-2 text-3xl font-semibold text-slate-900">
+              {{ accountLoading ? 'Cargando...' : accountNumber || 'No disponible' }}
+            </p>
+            <p class="mt-2 text-sm text-slate-600">Tu cuenta principal asociada a esta banca.</p>
           </article>
           <article class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
             <h2 class="font-semibold text-slate-800">Accesos directos</h2>
@@ -54,8 +57,10 @@ import Selector from '../../components/layout/selector.vue'
 
 const balance = ref(0)
 const lastUpdated = ref('')
+const accountNumber = ref('')
 const balanceLoading = ref(true)
 const balanceError = ref(false)
+const accountLoading = ref(true)
 
 const formatCurrency = (value) => {
   return new Intl.NumberFormat('es-ES', {
@@ -109,7 +114,37 @@ const loadBalance = async () => {
   }
 }
 
-onMounted(() => {
-  loadBalance()
+const loadAccountNumber = async () => {
+  const token = localStorage.getItem('token')
+
+  if (!token) {
+    accountLoading.value = false
+    return
+  }
+
+  try {
+    const response = await axios.get('/v1/client/user/whoami', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Accept-Language': 'es',
+      },
+    })
+
+    const payload = response?.data?.data ?? response?.data ?? {}
+    const fetchedAccountNumber = payload?.account_number ?? payload?.accountNumber ?? payload?.number ?? ''
+    accountNumber.value = fetchedAccountNumber ? String(fetchedAccountNumber) : ''
+    if (fetchedAccountNumber) {
+      localStorage.setItem('accountNumber', String(fetchedAccountNumber))
+    }
+  } catch (error) {
+    console.error('Error al cargar el número de cuenta:', error)
+  } finally {
+    accountLoading.value = false
+  }
+}
+
+onMounted(async () => {
+  await loadBalance()
+  await loadAccountNumber()
 })
 </script>

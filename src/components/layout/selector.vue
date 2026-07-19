@@ -1,10 +1,10 @@
 <template>
-  <aside class="w-72 shrink-0 rounded-3xl border border-slate-200 bg-slate-900 p-4 shadow-xl">
+  <aside class="w-72 shrink-0 rounded-3xl border border-slate-200 bg-white p-4 shadow-lg">
     <div class="mb-4">
-      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-slate-400">
+      <p class="text-xs font-semibold uppercase tracking-[0.25em] text-cyan-600">
         Acceso rápido
       </p>
-      <h2 class="mt-1 text-lg font-semibold text-white">Secciones del banco</h2>
+      <h2 class="mt-1 text-lg font-semibold text-slate-800">Secciones del banco</h2>
     </div>
 
     <nav class="flex flex-col gap-2" aria-label="Selector de secciones">
@@ -14,15 +14,15 @@
         type="button"
         class="flex items-center justify-between rounded-2xl border px-4 py-3 text-left transition-all duration-200"
         :class="item.active
-          ? 'border-cyan-400 bg-cyan-500/20 text-white shadow-sm'
-          : 'border-slate-700 bg-slate-800/80 text-slate-200 hover:border-slate-500 hover:bg-slate-800'"
+          ? 'border-cyan-500 bg-cyan-50 text-cyan-700 shadow-sm'
+          : 'border-slate-200 bg-slate-50 text-slate-700 hover:border-cyan-200 hover:bg-white'"
         @click="handleClick(item)"
       >
         <span class="flex items-center gap-3">
           <span class="text-lg">{{ item.icon }}</span>
           <span class="font-medium">{{ item.label }}</span>
         </span>
-        <span v-if="item.routeName" class="text-xs text-cyan-300">Ir</span>
+        <span v-if="item.routeName" class="text-xs font-semibold text-cyan-600">Ir</span>
       </button>
     </nav>
   </aside>
