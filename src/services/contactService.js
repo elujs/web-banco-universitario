@@ -50,15 +50,28 @@ export const createContact = async (payload) => {
   }
 }
 
-export const getUserByAccountNumber = async (accountNumber) => {
+export const getContactById = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/client/user/account/${encodeURIComponent(accountNumber)}`, {
+    const response = await axios.get(`${CONTACTS_ENDPOINT}/${id}`, {
       headers: getAuthHeaders(),
     })
 
     return response?.data?.data ?? response?.data ?? {}
   } catch (error) {
-    console.error('Error al obtener el usuario por número de cuenta:', error)
+    console.error('Error al obtener el contacto por ID:', error)
+    throw error
+  }
+}
+
+export const updateContact = async (id, payload) => {
+  try {
+    const response = await axios.put(`${CONTACTS_ENDPOINT}/${id}`, payload, {
+      headers: getAuthHeaders(),
+    })
+
+    return response?.data?.data ?? response?.data ?? {}
+  } catch (error) {
+    console.error('Error al actualizar el contacto:', error)
     throw error
   }
 }
