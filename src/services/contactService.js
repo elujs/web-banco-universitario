@@ -50,13 +50,23 @@ export const createContact = async (payload) => {
   }
 }
 
+const normalizeContactDetail = (payload) => {
+  const detail = payload?.data ?? payload
+
+  if (detail?.user && typeof detail.user === 'object') {
+    return detail.user
+  }
+
+  return detail ?? {}
+}
+
 export const getContactById = async (id) => {
   try {
     const response = await axios.get(`${CONTACTS_ENDPOINT}/${id}`, {
       headers: getAuthHeaders(),
     })
 
-    return response?.data?.data ?? response?.data ?? {}
+    return normalizeContactDetail(response?.data ?? {})
   } catch (error) {
     console.error('Error al obtener el contacto por ID:', error)
     throw error
