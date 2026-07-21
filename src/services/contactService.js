@@ -49,3 +49,16 @@ export const createContact = async (payload) => {
     throw error
   }
 }
+
+export const getUserByAccountNumber = async (accountNumber) => {
+  try {
+    const response = await axios.get(`${API_URL}/client/user/account/${encodeURIComponent(accountNumber)}`, {
+      headers: getAuthHeaders(),
+    })
+
+    return response?.data?.data ?? response?.data ?? {}
+  } catch (error) {
+    console.error('Error al obtener el usuario por número de cuenta:', error)
+    throw error
+  }
+}
