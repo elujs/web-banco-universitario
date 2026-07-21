@@ -88,6 +88,7 @@
                           <button
                             type="button"
                             class="rounded-xl border border-rose-200 bg-white px-3 py-2 text-sm font-medium text-rose-700 transition hover:bg-rose-50"
+                            @click="openDeleteModal(contact)"
                           >
                             Borrar
                           </button>
@@ -196,7 +197,43 @@
       </div>
     </div>
 
-    <div v-if="isEditModalOpen" class="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/60 px-4 py-6">
+    <div v-if="isDeleteModalOpen" class="fixed inset-0 z-[60] flex items-center justify-center bg-slate-900/60 px-4 py-6">
+      <div class="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-rose-600">Eliminar contacto</p>
+            <h3 class="mt-2 text-xl font-semibold text-slate-900">¿Deseas eliminar este contacto?</h3>
+          </div>
+          <button type="button" class="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700" @click="closeDeleteModal">
+            ✕
+          </button>
+        </div>
+
+        <p class="mt-4 text-sm text-slate-600">
+          Esta acción eliminará a <span class="font-semibold text-slate-800">{{ contactToDelete?.alias || 'este contacto' }}</span> de tu lista de contactos.
+        </p>
+
+        <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
+          <button
+            type="button"
+            class="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+            @click="closeDeleteModal"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            :disabled="isDeleting"
+            class="inline-flex items-center justify-center rounded-2xl bg-rose-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-rose-700 disabled:cursor-not-allowed disabled:bg-rose-400"
+            @click="deleteSelectedContact"
+          >
+            {{ isDeleting ? 'Eliminando...' : 'Eliminar' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="isEditModalOpen" class="fixed inset-0 z-[70] flex items-center justify-center bg-slate-900/60 px-4 py-6">
       <div class="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl">
         <div class="flex items-start justify-between gap-4">
           <div>
@@ -253,7 +290,7 @@
 import { computed, onMounted, ref } from 'vue'
 import AppHeader from '../../components/layout/AppHeader.vue'
 import Selector from '../../components/layout/selector.vue'
-import { createContact, getContactById, getContacts, updateContact } from '../../services/contactService'
+import { createContact, deleteContact, getContactById, getContacts, updateContact } from '../../services/contactService'
 
 const contacts = ref([])
 const isLoading = ref(false)
@@ -261,10 +298,13 @@ const isSubmitting = ref(false)
 const showForm = ref(false)
 const isContactModalOpen = ref(false)
 const isEditModalOpen = ref(false)
+const isDeleteModalOpen = ref(false)
 const selectedContact = ref(null)
+const contactToDelete = ref(null)
 const selectedContactLoading = ref(false)
 const selectedContactError = ref('')
 const isEditing = ref(false)
+const isDeleting = ref(false)
 const editMessage = ref('')
 const editMessageType = ref('success')
 const message = ref('')
@@ -419,6 +459,43 @@ const openEditModal = (contact) => {
   editMessage.value = ''
   editMessageType.value = 'success'
   isEditModalOpen.value = true
+}
+
+const openDeleteModal = (contact) => {
+  if (!contact) return
+
+  contactToDelete.value = contact
+  isDeleteModalOpen.value = true
+}
+
+const closeDeleteModal = () => {
+  isDeleteModalOpen.value = false
+  contactToDelete.value = null
+  isDeleting.value = false
+}
+
+const deleteSelectedContact = async () => {
+  if (!contactToDelete.value?.id) {
+    message.value = 'No se encontró el identificador del contacto.'
+    messageType.value = 'error'
+    return
+  }
+
+  isDeleting.value = true
+
+  try {
+    await deleteContact(contactToDelete.value.id)
+    message.value = 'Contacto eliminado correctamente.'
+    messageType.value = 'success'
+    await loadContacts()
+    closeDeleteModal()
+  } catch (error) {
+    console.error('Error al eliminar el contacto:', error)
+    message.value = 'No se pudo eliminar el contacto.'
+    messageType.value = 'error'
+  } finally {
+    isDeleting.value = false
+  }
 }
 
 const closeEditModal = () => {

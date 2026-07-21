@@ -85,3 +85,16 @@ export const updateContact = async (id, payload) => {
     throw error
   }
 }
+
+export const deleteContact = async (id) => {
+  try {
+    const response = await axios.delete(`${CONTACTS_ENDPOINT}/${id}`, {
+      headers: getAuthHeaders(),
+    })
+
+    return response?.data?.data ?? response?.data ?? {}
+  } catch (error) {
+    console.error('Error al eliminar el contacto:', error)
+    throw error
+  }
+}
