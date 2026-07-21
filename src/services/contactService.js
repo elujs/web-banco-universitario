@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const API_URL = '/v1'
+const CONTACTS_ENDPOINT = `${API_URL}/client/contact`
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token')
@@ -19,9 +20,13 @@ const normalizeList = (payload) => {
   return []
 }
 
-export const getContacts = async () => {
+export const getContacts = async (page = 1, pageSize = 20) => {
   try {
-    const response = await axios.get(`${API_URL}/client/contact`, {
+    const response = await axios.get(CONTACTS_ENDPOINT, {
+      params: {
+        page,
+        page_size: pageSize,
+      },
       headers: getAuthHeaders(),
     })
 
@@ -34,7 +39,7 @@ export const getContacts = async () => {
 
 export const createContact = async (payload) => {
   try {
-    const response = await axios.post(`${API_URL}/client/contact`, payload, {
+    const response = await axios.post(CONTACTS_ENDPOINT, payload, {
       headers: getAuthHeaders(),
     })
 
