@@ -4,6 +4,8 @@
       <AppHeader />
 
       <div class="flex flex-col gap-6 lg:flex-row">
+        <Selector />
+
         <section class="flex-1 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
         <p class="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-600">Panel del banco</p>
         <h1 class="mt-2 text-2xl font-semibold text-slate-900">Bienvenido a tu banca universitaria</h1>
@@ -42,8 +44,6 @@
           </article>
         </div>
       </section>
-
-        <Selector />
       </div>
     </div>
   </div>
