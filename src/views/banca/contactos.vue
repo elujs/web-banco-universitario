@@ -12,70 +12,128 @@
               <p class="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-600">Contactos frecuentes</p>
               <h1 class="mt-2 text-2xl font-semibold text-slate-900">Gestiona tus contactos de confianza</h1>
               <p class="mt-3 max-w-2xl text-slate-600">
-                Mantén a mano a las personas o instituciones que usas más seguido para transferencias rápidas.
+                Registra nuevos contactos para tus transferencias rápidas y mantén tus favoritos siempre a mano.
               </p>
             </div>
-
-            <button
-              type="button"
-              class="inline-flex items-center justify-center rounded-2xl bg-cyan-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700"
-            >
-              + Agregar contacto
-            </button>
           </div>
 
-          <div class="mt-8 grid gap-4 xl:grid-cols-[1.3fr_0.7fr]">
-            <div class="space-y-4">
-              <article
-                v-for="contact in contacts"
-                :key="contact.name"
-                class="flex items-center gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm"
+          <div class="mt-8 flex flex-col gap-4">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div class="text-sm text-slate-600">
+                Usa este botón para abrir el formulario y agregar un nuevo contacto.
+              </div>
+              <button
+                type="button"
+                @click="showForm = !showForm"
+                class="inline-flex items-center justify-center rounded-2xl bg-cyan-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700"
               >
-                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-cyan-600 text-sm font-semibold text-white">
-                  {{ contact.initials }}
-                </div>
+                {{ showForm ? 'Cancelar' : 'Crear contacto' }}
+              </button>
+            </div>
 
-                <div class="flex-1">
-                  <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                    <div>
-                      <h2 class="font-semibold text-slate-800">{{ contact.name }}</h2>
-                      <p class="text-sm text-slate-600">{{ contact.description }}</p>
-                    </div>
-                    <span class="rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-700">
-                      {{ contact.tag }}
-                    </span>
+            <div v-if="showForm" class="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+              <form class="rounded-3xl border border-slate-200 bg-slate-50 p-5" @submit.prevent="handleSubmit">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h2 class="text-lg font-semibold text-slate-900">Crear nuevo contacto</h2>
+                    <p class="mt-1 text-sm text-slate-600">Completa los datos requeridos para agregar un nuevo contacto.</p>
                   </div>
                 </div>
 
-                <div class="text-right text-sm text-slate-600">
-                  <p class="font-semibold text-slate-800">{{ contact.account }}</p>
-                  <p class="mt-1">{{ contact.bank }}</p>
-                </div>
-              </article>
-            </div>
+                <div class="mt-5 space-y-4">
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700" for="alias">Alias</label>
+                    <input
+                      id="alias"
+                      v-model="form.alias"
+                      type="text"
+                      required
+                      class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
+                      placeholder="Ej. Mamá"
+                    />
+                  </div>
 
-            <aside class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
-              <p class="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-600">Resumen</p>
-              <h2 class="mt-2 text-lg font-semibold text-slate-900">Tus contactos más usados</h2>
-              <p class="mt-2 text-sm text-slate-600">
-                Aquí verás información rápida para tus transferencias preferidas.
-              </p>
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700" for="account_number">Número de cuenta</label>
+                    <input
+                      id="account_number"
+                      v-model="form.account_number"
+                      type="text"
+                      required
+                      class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
+                      placeholder="Ej. 123456789"
+                    />
+                  </div>
 
-              <div class="mt-5 space-y-3">
-                <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                  <p class="text-sm text-slate-500">Contactos registrados</p>
-                  <p class="mt-1 text-2xl font-semibold text-slate-900">4</p>
+                  <div>
+                    <label class="mb-2 block text-sm font-medium text-slate-700" for="description">Descripción</label>
+                    <textarea
+                      id="description"
+                      v-model="form.description"
+                      rows="4"
+                      required
+                      class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
+                      placeholder="Ej. Pago de mensualidad"
+                    />
+                  </div>
                 </div>
-                <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                  <p class="text-sm text-slate-500">Transferencias rápidas</p>
-                  <p class="mt-1 text-2xl font-semibold text-slate-900">12</p>
+
+                <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <p v-if="message" class="text-sm" :class="messageType === 'error' ? 'text-rose-600' : 'text-emerald-600'">
+                    {{ message }}
+                  </p>
+                  <button
+                    type="submit"
+                    :disabled="isSubmitting"
+                    class="inline-flex items-center justify-center rounded-2xl bg-cyan-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700 disabled:cursor-not-allowed disabled:bg-cyan-400"
+                  >
+                    {{ isSubmitting ? 'Guardando...' : 'Guardar contacto' }}
+                  </button>
                 </div>
-                <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                  <p class="text-sm text-slate-500">Última actualización</p>
-                  <p class="mt-1 text-sm font-semibold text-slate-900">Hoy, 09:30 a. m.</p>
+              </form>
+
+              <div class="space-y-4">
+                <aside class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
+                  <p class="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-600">Resumen</p>
+                  <h2 class="mt-2 text-lg font-semibold text-slate-900">Tus contactos recientes</h2>
+                  <p class="mt-2 text-sm text-slate-600">
+                    Los nuevos contactos aparecerán aquí después de guardarse.
+                  </p>
+
+                  <div class="mt-5 space-y-3">
+                    <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                      <p class="text-sm text-slate-500">Contactos registrados</p>
+                      <p class="mt-1 text-2xl font-semibold text-slate-900">{{ contacts.length }}</p>
+                    </div>
+                    <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                      <p class="text-sm text-slate-500">Estado</p>
+                      <p class="mt-1 text-sm font-semibold text-slate-900">{{ contacts.length > 0 ? 'Listo para transferir' : 'Sin contactos aún' }}</p>
+                    </div>
+                  </div>
+                </aside>
+
+                <div class="rounded-3xl border border-slate-200 bg-white p-5">
+                  <h3 class="text-lg font-semibold text-slate-900">Lista actual</h3>
+                  <div v-if="isLoading" class="mt-4 text-sm text-slate-600">Cargando contactos...</div>
+                  <div v-else-if="contacts.length === 0" class="mt-4 text-sm text-slate-600">Aún no tienes contactos guardados.</div>
+                  <div v-else class="mt-4 space-y-3">
+                    <article
+                      v-for="contact in contacts"
+                      :key="contact.id ?? contact.account_number"
+                      class="rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                    >
+                      <div class="flex items-center justify-between">
+                        <div>
+                          <p class="font-semibold text-slate-800">{{ contact.alias }}</p>
+                          <p class="text-sm text-slate-600">{{ contact.description }}</p>
+                        </div>
+                        <span class="rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-700">{{ contact.account_number }}</span>
+                      </div>
+                    </article>
+                  </div>
                 </div>
               </div>
-            </aside>
+            </div>
           </div>
         </section>
       </div>
@@ -84,41 +142,73 @@
 </template>
 
 <script setup>
+import { onMounted, ref } from 'vue'
 import AppHeader from '../../components/layout/AppHeader.vue'
 import Selector from '../../components/layout/selector.vue'
+import { createContact, getContacts } from '../../services/contactService'
 
-const contacts = [
-  {
-    name: 'Ana Morales',
-    initials: 'AM',
-    description: 'Estudiante de Ingeniería',
-    account: 'Cuenta • 0012-4567',
-    bank: 'Banco Universitario',
-    tag: 'Frecuente',
-  },
-  {
-    name: 'Carlos Rojas',
-    initials: 'CR',
-    description: 'Pago de mensualidad',
-    account: 'Cuenta • 0023-9876',
-    bank: 'Banco Universitario',
-    tag: 'Prioritario',
-  },
-  {
-    name: 'Lucía Fernández',
-    initials: 'LF',
-    description: 'Apoyo familiar',
-    account: 'Cuenta • 0045-1122',
-    bank: 'Banco Universitario',
-    tag: 'Nuevo',
-  },
-  {
-    name: 'Servicios UCS',
-    initials: 'SU',
-    description: 'Pagos institucionales',
-    account: 'Cuenta • 0099-3410',
-    bank: 'Banco Universitario',
-    tag: 'Institución',
-  },
-]
+const contacts = ref([])
+const isLoading = ref(false)
+const isSubmitting = ref(false)
+const showForm = ref(false)
+const message = ref('')
+const messageType = ref('success')
+
+const form = ref({
+  alias: '',
+  account_number: '',
+  description: '',
+})
+
+const resetForm = () => {
+  form.value = {
+    alias: '',
+    account_number: '',
+    description: '',
+  }
+}
+
+const loadContacts = async () => {
+  isLoading.value = true
+
+  try {
+    const data = await getContacts()
+    contacts.value = Array.isArray(data) ? data : []
+  } catch (error) {
+    console.error('No se pudieron cargar los contactos:', error)
+    message.value = 'No se pudieron cargar los contactos.'
+    messageType.value = 'error'
+  } finally {
+    isLoading.value = false
+  }
+}
+
+const handleSubmit = async () => {
+  isSubmitting.value = true
+  message.value = ''
+
+  try {
+    await createContact({
+      alias: form.value.alias,
+      account_number: form.value.account_number,
+      description: form.value.description,
+    })
+
+    message.value = 'Contacto creado correctamente.'
+    messageType.value = 'success'
+    showForm.value = false
+    resetForm()
+    await loadContacts()
+  } catch (error) {
+    console.error('Error al crear el contacto:', error)
+    message.value = 'No se pudo crear el contacto. Verifica los datos o intenta más tarde.'
+    messageType.value = 'error'
+  } finally {
+    isSubmitting.value = false
+  }
+}
+
+onMounted(() => {
+  loadContacts()
+})
 </script>
