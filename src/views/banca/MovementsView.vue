@@ -90,6 +90,8 @@ onMounted(async () => {
       <AppHeader />
 
       <div class="flex flex-col gap-6 lg:flex-row">
+        <Selector />
+
         <div class="flex-1 space-y-6">
           <div>
             <h1 class="text-3xl font-bold text-gray-900">Movimientos</h1>
@@ -118,8 +120,6 @@ onMounted(async () => {
             />
           </div>
         </div>
-
-        <Selector />
       </div>
 
       <MovementModal
