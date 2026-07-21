@@ -39,7 +39,7 @@ const sections = computed(() => [
   { label: 'Inicio', icon: '🏠', routeName: 'dashboard', active: route.name === 'dashboard' },
   { label: 'Movimientos', icon: '📄', routeName: 'movements', active: route.name === 'movements' },
   { label: 'Transferencias', icon: '↗️', routeName: null, active: false },
-  { label: 'Contactos frecuentes', icon: '👥', routeName: null, active: false },
+  { label: 'Contactos frecuentes', icon: '👥', routeName: 'contactos', active: route.name === 'contactos' },
   { label: 'Seguridad', icon: '🔒', routeName: null, active: false },
 ])
 
