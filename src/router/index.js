@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeInstitucional from '../views/landing/HomeInstitucional.vue'
 import Login from '../views/auth/Login.vue'
 import UserRegister from '../views/auth/UserRegister.vue'
+import Dashboard from '../views/banca/dashboard.vue'
 import MovementsView from '../views/banca/MovementsView.vue'
 
 const router = createRouter({
@@ -22,6 +23,12 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: UserRegister,
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: Dashboard,
+      meta: { requiresAuth: true },
     },
     {
       path: '/movements',

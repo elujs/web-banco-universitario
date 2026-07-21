@@ -250,7 +250,7 @@ const handleLogin = async () => {
     if (result.data && result.data.jwt) {
       localStorage.setItem('token', result.data.jwt)
       localStorage.setItem('userName', `${result.data.first_name}`);
-      router.push('/movements')
+      router.push('/dashboard')
     } else {
       throw new Error('No se recibió el token de acceso')
     }
