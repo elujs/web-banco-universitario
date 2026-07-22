@@ -51,17 +51,17 @@ npm run dev
 
 📂 Estructura y Arquitectura del Proyecto
 ```bash
-  src/
+src/
 ├── assets/                  # Recursos estáticos (Logos, imágenes, mockups)
-│   └── dashboard-mockup.png # Vista previa de la banca en línea
-├── components/              # Módulos de interfaz de usuario reutilizables
-│   ├── Navbar.vue           # Barra de navegación superior integrada
-│   ├── Hero.vue             # Banner principal con smartphone CSS y tarjeta Visa 3D
-│   ├── Servicios.vue        # Sección de servicios operacionales (2 columnas)
-│   ├── SolucionesFinancieras.vue # Módulo tecnológico con tarjetas minimalistas
-│   └── Nosotros.vue         # Sección institucional con sistema de acordeón
-├── views/                   # Vistas principales de la aplicación
-│   └── HomeInstitucional.vue # Contenedor y ensamblador de la Landing Page
+├── components/              # Módulos de interfaz de usuario reutilizables y secciones visuales
+│   ├── banca/               # Componentes internos específicos de la banca (dashboard, movimientos, seguridad)
+│   ├── landing/             # Componentes de la página de inicio
+│   └── layout/              # Estructuras compartidas (barras de navegación, menús laterales)
+├── router/                  # Configuración de rutas y mapeo de navegación con Vue Router
+├── services/                # Capa de servicios encargada de conectar y comunicarse directamente con la API mediante Axios
+├── views/                   # Vistas principales de la aplicación divididas por contextos:
+│   ├── auth/                # Módulo de autenticación: flujos donde el usuario NO necesita estar logueado (Login, Registro, Recuperar contraseña)
+│   ├── banca/               # Módulo privado de la banca en línea: vistas que requieren autenticación activa (Movimientos, Transferencias, Seguridad, etc.)
+│   └── landing/             # Sitio web público institucional y páginas informativas
 ├── App.vue                  # Componente raíz de la aplicación
-└── main.js                  # Punto de entrada JavaScript (Instancia y configuración de Vue)
-```
+└── main.js                  # Punto de entrada JavaScript (Instancia, plugins y configuración global de Vue)

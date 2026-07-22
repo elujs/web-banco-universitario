@@ -106,12 +106,13 @@ const goToPage = (page) => {
         </div>
         
         <!-- Paginación inferior estilizada -->
-        <div class="flex items-center justify-between px-6 py-4 bg-white border-t border-slate-100">
+       <div class="flex items-center justify-between px-6 py-4 bg-white border-t border-slate-100">
             <span class="text-xs font-medium text-slate-400">
-                Mostrando <span class="text-slate-700 font-bold">{{ (currentPage - 1) * pageSize + 1 }}-{{ Math.min(currentPage * pageSize, totalItems) }}</span> de <span class="text-slate-700 font-bold">{{ totalItems }}</span> resultados
+                Mostrando <span class="text-slate-700 font-bold">{{ pageSize }}</span> resultados
             </span>
             
             <div class="flex items-center space-x-1.5">
+                <!-- Botón flecha izquierda -->
                 <button 
                     @click="goToPage(currentPage - 1)"
                     :disabled="currentPage === 1"
@@ -121,13 +122,15 @@ const goToPage = (page) => {
                     </svg>
                 </button>
                 
+                <!-- Número de la página en la que te encuentras -->
                 <div class="px-3.5 h-8 flex items-center justify-center rounded-xl bg-[#085F63] text-white text-xs font-bold shadow-sm">
-                    {{ currentPage }} / {{ totalPages }}
+                    {{ currentPage }}
                 </div>
                 
+                <!-- Botón flecha derecha -->
                 <button 
                     @click="goToPage(currentPage + 1)"
-                    :disabled="currentPage === totalPages"
+                    :disabled="currentPage >= totalPages"
                     class="w-8 h-8 flex items-center justify-center rounded-xl border border-slate-200 text-slate-500 hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
