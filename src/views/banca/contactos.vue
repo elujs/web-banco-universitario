@@ -12,7 +12,7 @@
               <p class="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-600">Contactos frecuentes</p>
               <h1 class="mt-2 text-2xl font-semibold text-slate-900">Gestiona tus contactos de confianza</h1>
               <p class="mt-3 max-w-2xl text-slate-600">
-                Registra nuevos contactos para tus transferencias rápidas y mantén tus favoritos siempre a mano.
+                busca, agrega y administra tus contactos universitarios.
               </p>
             </div>
           </div>
@@ -30,69 +30,47 @@
                 {{ showForm ? 'Cancelar' : 'Crear contacto' }}
               </button>
             </div>
-
-            <div v-if="!showForm" class="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-              <div class="space-y-4">
-                <aside class="rounded-3xl border border-slate-200 bg-slate-50 p-5">
-                  <p class="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-600">Resumen</p>
-                  <h2 class="mt-2 text-lg font-semibold text-slate-900">Tus contactos recientes</h2>
-                  <p class="mt-2 text-sm text-slate-600">
-                    Los nuevos contactos aparecerán aquí después de guardarse.
-                  </p>
-
-                  <div class="mt-5 space-y-3">
-                    <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                      <p class="text-sm text-slate-500">Contactos registrados</p>
-                      <p class="mt-1 text-2xl font-semibold text-slate-900">{{ contacts.length }}</p>
-                    </div>
-                    <div class="rounded-2xl border border-slate-200 bg-white p-4">
-                      <p class="text-sm text-slate-500">Estado</p>
-                      <p class="mt-1 text-sm font-semibold text-slate-900">{{ contacts.length > 0 ? 'Listo para transferir' : 'Sin contactos aún' }}</p>
-                    </div>
-                  </div>
-                </aside>
-
-                <div class="rounded-3xl border border-slate-200 bg-white p-5">
-                  <h3 class="text-lg font-semibold text-slate-900">Lista actual</h3>
-                  <div v-if="isLoading" class="mt-4 text-sm text-slate-600">Cargando contactos...</div>
-                  <div v-else-if="contacts.length === 0" class="mt-4 text-sm text-slate-600">Aún no tienes contactos guardados.</div>
-                  <div v-else class="mt-4 space-y-3">
-                    <div
-                      v-for="contact in contacts"
-                      :key="contact.id ?? contact.account_number"
-                      class="w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-cyan-300 hover:bg-cyan-50"
+                        <div v-if="!showForm" class="space-y-4">
+              <div class="rounded-3xl border border-slate-200 bg-white p-5">
+                <h3 class="text-lg font-semibold text-slate-900">Lista actual</h3>
+                <div v-if="isLoading" class="mt-4 text-sm text-slate-600">Cargando contactos...</div>
+                <div v-else-if="contacts.length === 0" class="mt-4 text-sm text-slate-600">Aún no tienes contactos guardados.</div>
+                <div v-else class="mt-4 space-y-3">
+                  <div
+                    v-for="contact in contacts"
+                    :key="contact.id ?? contact.account_number"
+                    class="w-full rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-cyan-300 hover:bg-cyan-50"
+                  >
+                    <button
+                      type="button"
+                      class="w-full text-left"
+                      @click="openContactModal(contact.id)"
                     >
-                      <button
-                        type="button"
-                        class="w-full text-left"
-                        @click="openContactModal(contact.id)"
-                      >
-                        <div class="flex items-center justify-between gap-3">
-                          <div>
-                            <p class="font-semibold text-slate-800">{{ contact.alias }}</p>
-                            <p class="text-sm text-slate-600">{{ contact.description }}</p>
-                          </div>
-                          <span class="rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-700">{{ contact.account_number }}</span>
+                      <div class="flex items-center justify-between gap-3">
+                        <div>
+                          <p class="font-semibold text-slate-800">{{ contact.alias }}</p>
+                          <p class="text-sm text-slate-600">{{ contact.description }}</p>
                         </div>
-                      </button>
+                        <span class="rounded-full bg-cyan-100 px-3 py-1 text-xs font-semibold text-cyan-700">{{ contact.account_number }}</span>
+                      </div>
+                    </button>
 
-                      <div class="mt-3 border-t border-slate-300 pt-3">
-                        <div class="flex flex-wrap gap-2">
-                          <button
-                            type="button"
-                            class="rounded-xl border border-emerald-600 bg-white px-3 py-2 text-sm font-medium text-emerald-700 transition hover:bg-emerald-50"
-                            @click="openEditModal(contact)"
-                          >
-                            Modificar
-                          </button>
-                          <button
-                            type="button"
-                            class="rounded-xl border border-rose-200 bg-white px-3 py-2 text-sm font-medium text-rose-700 transition hover:bg-rose-50"
-                            @click="openDeleteModal(contact)"
-                          >
-                            Borrar
-                          </button>
-                        </div>
+                    <div class="mt-3 border-t border-slate-300 pt-3">
+                      <div class="flex flex-wrap gap-2">
+                        <button
+                          type="button"
+                          class="rounded-xl border border-emerald-600 bg-white px-3 py-2 text-sm font-medium text-emerald-700 transition hover:bg-emerald-50"
+                          @click="openEditModal(contact)"
+                        >
+                          Modificar
+                        </button>
+                        <button
+                          type="button"
+                          class="rounded-xl border border-rose-200 bg-white px-3 py-2 text-sm font-medium text-rose-700 transition hover:bg-rose-50"
+                          @click="openDeleteModal(contact)"
+                        >
+                          Borrar
+                        </button>
                       </div>
                     </div>
                   </div>
