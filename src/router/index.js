@@ -5,6 +5,7 @@ import Login from '../views/auth/Login.vue'
 import UserRegister from '../views/auth/UserRegister.vue'
 import Dashboard from '../views/banca/dashboard.vue'
 import MovementsView from '../views/banca/MovementsView.vue'
+import Contactos from '../views/banca/contactos.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,12 @@ const router = createRouter({
       path: '/movements',
       name: 'movements',
       component: MovementsView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/contactos',
+      name: 'contactos',
+      component: Contactos,
       meta: { requiresAuth: true },
     },
   ],
