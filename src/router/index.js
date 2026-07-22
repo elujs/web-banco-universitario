@@ -38,6 +38,12 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
+    path: '/security',
+    name: 'security',
+    component: () => import('@/views/banca/SecurityView.vue'),
+    meta: { requiresAuth: true }
+    },
+    {
       path: '/contactos',
       name: 'contactos',
       component: Contactos,
