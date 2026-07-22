@@ -44,8 +44,8 @@ const router = createRouter({
     meta: { requiresAuth: true }
     },
     {
-      path: '/contactos',
-      name: 'contactos',
+      path: '/contacts',
+      name: 'contacts',
       component: Contactos,
       meta: { requiresAuth: true },
     },
