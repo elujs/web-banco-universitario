@@ -29,6 +29,12 @@ const router = createRouter({
       component: MovementsView,
       meta: { requiresAuth: true },
     },
+    {
+    path: '/security',
+    name: 'security',
+    component: () => import('@/views/banca/SecurityView.vue'),
+    meta: { requiresAuth: true }
+    }
   ],
 })
 
