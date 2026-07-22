@@ -75,7 +75,7 @@ export const getContactById = async (id) => {
 
 export const updateContact = async (id, payload) => {
   try {
-    const response = await axios.put(`${CONTACTS_ENDPOINT}/${id}`, payload, {
+    const response = await axios.patch(`${CONTACTS_ENDPOINT}/${id}`, payload, {
       headers: getAuthHeaders(),
     })
 
