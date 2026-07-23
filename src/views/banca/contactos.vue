@@ -6,23 +6,28 @@
       <div class="flex flex-col gap-6 lg:flex-row">
         <Selector />
 
-        <section class="flex-1 rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-            <div>
-              <p class="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-600">Contactos frecuentes</p>
-              <h1 class="mt-2 text-2xl font-semibold text-slate-900">Gestiona tus contactos de confianza</h1>
-              <p class="mt-3 max-w-2xl text-slate-600">
-                busca, agrega y administra tus contactos universitarios.
-              </p>
+        <section class="flex-1">
+          <!-- Cabecera unificada con la estética de la banca -->
+          <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 mb-6">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-[#085F63] shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <div>
+                <h1 class="text-lg font-bold text-slate-900">Gestiona tus contactos de confianza</h1>
+                <p class="text-xs text-slate-400">Busca, agrega y administra tus contactos universitarios.</p>
+              </div>
             </div>
           </div>
 
-          <div class="mt-8 flex flex-col gap-4">
+          <div class="flex flex-col gap-4">
             <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <button
                 type="button"
                 @click="showForm = !showForm"
-                class="inline-flex items-center justify-center rounded-2xl bg-cyan-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700"
+                class="inline-flex items-center justify-center rounded-2xl bg-[#085F63] px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#064a4d]"
               >
                 {{ showForm ? 'Cancelar' : 'Crear contacto' }}
               </button>
@@ -36,7 +41,7 @@
                   <div
                     v-for="contact in contacts"
                     :key="contact.id ?? contact.account_number"
-                    class="rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-cyan-300 hover:bg-cyan-50"
+                    class="rounded-2xl border border-slate-200 bg-slate-50 p-4 transition hover:border-[#085F63] hover:bg-slate-100/80"
                   >
                     <button
                       type="button"
@@ -50,7 +55,7 @@
                       </div>
                     </button>
 
-                    <div class="mt-3 border-t border-slate-300 pt-3">
+                    <div class="mt-3 border-t border-slate-200 pt-3">
                       <div class="flex flex-wrap gap-2">
                         <button
                           type="button"
@@ -90,7 +95,7 @@
                       v-model="form.alias"
                       type="text"
                       required
-                      class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
+                      class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-[#085F63] focus:ring-1 focus:ring-[#085F63]"
                       placeholder="Ej. Mamá"
                     />
                   </div>
@@ -102,7 +107,7 @@
                       v-model="form.account_number"
                       type="text"
                       required
-                      class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
+                      class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-[#085F63] focus:ring-1 focus:ring-[#085F63]"
                       placeholder="Ej. 123456789"
                     />
                   </div>
@@ -114,7 +119,7 @@
                       v-model="form.description"
                       rows="4"
                       required
-                      class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
+                      class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-[#085F63] focus:ring-1 focus:ring-[#085F63]"
                       placeholder="Ej. Pago de mensualidad"
                     />
                   </div>
@@ -127,27 +132,27 @@
                   <button
                     type="submit"
                     :disabled="isSubmitting"
-                    class="inline-flex items-center justify-center rounded-2xl bg-cyan-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700 disabled:cursor-not-allowed disabled:bg-cyan-400"
+                    class="inline-flex items-center justify-center rounded-2xl bg-[#085F63] px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#064a4d] disabled:cursor-not-allowed disabled:bg-slate-400"
                   >
                     {{ isSubmitting ? 'Guardando...' : 'Guardar contacto' }}
                   </button>
                 </div>
               </form>
-
             </div>
           </div>
         </section>
       </div>
     </div>
 
+    <!-- Modal de Detalles simplificado: Solo Nombre (Alias) y Número de Cuenta -->
     <div v-if="isContactModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 px-4 py-6">
-      <div class="w-full max-w-2xl rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl">
+      <div class="w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl">
         <div class="flex items-start justify-between gap-4">
           <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-600">Detalle del contacto</p>
-            <h3 class="mt-2 text-xl font-semibold text-slate-900">Información completa</h3>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">Detalle del contacto</p>
+            <h3 class="mt-1 text-xl font-bold text-slate-900">Información del contacto</h3>
           </div>
-          <button type="button" class="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700" @click="closeContactModal">
+          <button type="button" class="rounded-full p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700" @click="closeContactModal">
             ✕
           </button>
         </div>
@@ -157,65 +162,54 @@
           {{ selectedContactError }}
         </div>
         <div v-else-if="selectedContact" class="mt-6 space-y-4">
-          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-            <div class="space-y-4">
-              <div class="space-y-2 pb-4">
-                <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Nombre completo</p>
-                <p class="text-lg font-semibold text-slate-900">{{ selectedContactFullName }}</p>
-              </div>
-
-              <div class="border-t border-slate-400"></div>
-
-              <div class="space-y-2 py-4">
-                <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Número de cuenta</p>
-                <p class="text-sm font-semibold text-slate-800">{{ selectedContact.account_number || 'No disponible' }}</p>
-              </div>
-
-              <div class="border-t border-slate-400"></div>
-
-              <div class="grid gap-4 sm:grid-cols-2 py-4">
-                <div>
-                  <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Número de documento</p>
-                  <p class="mt-2 text-sm font-semibold text-slate-800">{{ selectedContact.document_number || selectedContact.document || 'No disponible' }}</p>
-                </div>
-                <div>
-                  <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Fecha de nacimiento</p>
-                  <p class="mt-2 text-sm font-semibold text-slate-800">{{ selectedContact.birth_date || 'No disponible' }}</p>
-                </div>
-              </div>
-
-              <div class="border-t border-slate-400"></div>
-
-              <div class="grid gap-4 sm:grid-cols-2 py-4">
-                <div>
-                  <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Correo</p>
-                  <p class="mt-2 text-sm font-semibold text-slate-800">{{ selectedContact.email || 'No disponible' }}</p>
-                </div>
-                <div>
-                  <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Teléfono</p>
-                  <p class="mt-2 text-sm font-semibold text-slate-800">{{ selectedContact.phone || selectedContact.phone_number || 'No disponible' }}</p>
-                </div>
-              </div>
-
-              <div class="border-t border-slate-400"></div>
-
-              <div class="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-end">
-                <button
-                  type="button"
-                  class="inline-flex items-center justify-center rounded-2xl border border-emerald-600 bg-white px-4 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
-                  @click="openEditModal(selectedContact)"
-                >
-                  Modificar
-                </button>
-                <button
-                  type="button"
-                  class="inline-flex items-center justify-center rounded-2xl bg-rose-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-rose-700"
-                  @click="openDeleteModal(selectedContact)"
-                >
-                  Borrar
-                </button>
-              </div>
+          <div class="rounded-2xl border border-slate-200 bg-slate-50 p-5 space-y-4">
+            
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Nombre (Alias)</p>
+              <p class="text-base font-bold text-slate-900">{{ selectedContactAlias }}</p>
             </div>
+
+            <div class="border-t border-slate-200"></div>
+
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Número de cuenta</p>
+              <p class="text-sm font-semibold text-slate-800">{{ selectedContact.account_number || 'No disponible' }}</p>
+            </div>
+
+            <div class="border-t border-slate-200"></div>
+
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Nombre completo</p>
+              <p class="text-sm font-semibold text-slate-800">
+                {{ [selectedContact.first_name, selectedContact.last_name].filter(Boolean).join(' ') || selectedContact.alias || 'No disponible' }}
+              </p>
+            </div>
+
+            <div class="border-t border-slate-200"></div>
+
+            <div class="border-t border-slate-200"></div>
+
+            <div class="space-y-1">
+              <p class="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">Cédula</p>
+              <p class="text-sm font-semibold text-slate-800">{{ selectedContact.document_number || selectedContact.cedula || 'No disponible' }}</p>
+            </div>
+          </div>
+
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-end">
+            <button
+              type="button"
+              class="inline-flex items-center justify-center rounded-2xl border border-emerald-600 bg-white px-4 py-3 text-sm font-semibold text-emerald-700 transition hover:bg-emerald-50"
+              @click="openEditModal(selectedContact)"
+            >
+              Modificar
+            </button>
+            <button
+              type="button"
+              class="inline-flex items-center justify-center rounded-2xl bg-rose-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-rose-700"
+              @click="openDeleteModal(selectedContact)"
+            >
+              Borrar
+            </button>
           </div>
         </div>
       </div>
@@ -225,10 +219,10 @@
       <div class="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl">
         <div class="flex items-start justify-between gap-4">
           <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-rose-600">Eliminar contacto</p>
-            <h3 class="mt-2 text-xl font-semibold text-slate-900">¿Deseas eliminar este contacto?</h3>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-rose-600">Eliminar contacto</p>
+            <h3 class="mt-1 text-xl font-bold text-slate-900">¿Deseas eliminar este contacto?</h3>
           </div>
-          <button type="button" class="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700" @click="closeDeleteModal">
+          <button type="button" class="rounded-full p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700" @click="closeDeleteModal">
             ✕
           </button>
         </div>
@@ -261,10 +255,10 @@
       <div class="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl">
         <div class="flex items-start justify-between gap-4">
           <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-600">Modificar contacto</p>
-            <h3 class="mt-2 text-xl font-semibold text-slate-900">Actualiza los datos del contacto</h3>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-[#085F63]">Modificar contacto</p>
+            <h3 class="mt-1 text-xl font-bold text-slate-900">Actualiza los datos del contacto</h3>
           </div>
-          <button type="button" class="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-700" @click="closeEditModal">
+          <button type="button" class="rounded-full p-2 text-slate-400 transition hover:bg-slate-100 hover:text-slate-700" @click="closeEditModal">
             ✕
           </button>
         </div>
@@ -277,7 +271,7 @@
               v-model="editForm.alias"
               type="text"
               required
-              class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
+              class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-[#085F63] focus:ring-1 focus:ring-[#085F63]"
             />
           </div>
 
@@ -288,7 +282,7 @@
               v-model="editForm.description"
               rows="4"
               required
-              class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100"
+              class="w-full rounded-2xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-[#085F63] focus:ring-1 focus:ring-[#085F63]"
             />
           </div>
 
@@ -299,7 +293,7 @@
             <button
               type="submit"
               :disabled="isEditing"
-              class="inline-flex items-center justify-center rounded-2xl bg-cyan-600 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-700 disabled:cursor-not-allowed disabled:bg-cyan-400"
+              class="inline-flex items-center justify-center rounded-2xl bg-[#085F63] px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#064a4d] disabled:cursor-not-allowed disabled:bg-slate-400"
             >
               {{ isEditing ? 'Guardando...' : 'Guardar cambios' }}
             </button>
@@ -393,76 +387,6 @@ const handleSubmit = async () => {
   }
 }
 
-const formatFieldValue = (value) => {
-  if (value === null || value === undefined || value === '') {
-    return 'No disponible'
-  }
-
-  if (Array.isArray(value)) {
-    return value.join(', ')
-  }
-
-  if (typeof value === 'object') {
-    return JSON.stringify(value)
-  }
-
-  return String(value)
-}
-
-const formatFieldLabel = (key) => {
-  const labels = {
-    account_number: 'Número de cuenta',
-    alias: 'Alias',
-    description: 'Descripción',
-    first_name: 'Nombre',
-    last_name: 'Apellido',
-    email: 'Correo',
-    phone: 'Teléfono',
-    phone_number: 'Teléfono',
-    username: 'Usuario',
-    document_number: 'Número de documento',
-    birth_date: 'Fecha de nacimiento',
-    created_at: 'Fecha de creación',
-    updated_at: 'Última actualización',
-    name: 'Nombre',
-  }
-
-  return labels[key] ?? key.replace(/_/g, ' ').replace(/\b\w/g, (letter) => letter.toUpperCase())
-}
-
-const selectedContactFields = computed(() => {
-  if (!selectedContact.value || typeof selectedContact.value !== 'object') {
-    return []
-  }
-
-  return Object.entries(selectedContact.value)
-    .filter(([key, value]) => {
-      if (key === 'id') return false
-      if (value === null || value === undefined || value === '') return false
-      return true
-    })
-    .map(([key, value]) => ({
-      key,
-      label: formatFieldLabel(key),
-      value,
-    }))
-})
-
-const selectedContactFullName = computed(() => {
-  if (!selectedContact.value || typeof selectedContact.value !== 'object') {
-    return 'No disponible'
-  }
-
-  const firstName = selectedContact.value.first_name?.trim() || ''
-  const lastName = selectedContact.value.last_name?.trim() || ''
-
-  if (firstName || lastName) {
-    return `${firstName} ${lastName}`.trim()
-  }
-
-  return selectedContact.value.alias || 'No disponible'
-})
-
 const openContactModal = async (contactId) => {
   if (!contactId) return
 
@@ -481,6 +405,14 @@ const openContactModal = async (contactId) => {
   }
 }
 
+const selectedContactAlias = computed(() => {
+  if (!selectedContact.value || typeof selectedContact.value !== 'object') {
+    return 'No disponible'
+  }
+
+  return selectedContact.value.alias || selectedContact.value.name || selectedContact.value.username || 'No disponible'
+})
+
 const closeContactModal = () => {
   isContactModalOpen.value = false
   selectedContact.value = null
@@ -498,6 +430,7 @@ const openEditModal = (contact) => {
   editMessage.value = ''
   editMessageType.value = 'success'
   isEditModalOpen.value = true
+  isContactModalOpen.value = false
 }
 
 const openDeleteModal = (contact) => {
@@ -505,6 +438,7 @@ const openDeleteModal = (contact) => {
 
   contactToDelete.value = contact
   isDeleteModalOpen.value = true
+  isContactModalOpen.value = false
 }
 
 const closeDeleteModal = () => {

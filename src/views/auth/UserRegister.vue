@@ -87,7 +87,7 @@
                 <input
                   id="fechaNacimiento"
                   v-model="fechaNacimiento"
-                  type="datetime-local"
+                  type="date"
                   :class="inputClass(errors.fechaNacimiento)"
                   class="w-full px-4 py-3 rounded-2xl border bg-gray-50 text-gray-900 focus:outline-none transition"
                 />
@@ -280,7 +280,7 @@ function validate() {
 
 function formatFechaNacimiento(value) {
   if (!value) return ''
-  return `${value}:00Z`
+  return `${value}t00:00:00Z`
 }
 
 
