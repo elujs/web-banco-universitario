@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { updatePassword } from '@/services/userService'
+import { updatePassword } from '@/services/user'
 
 const currentPassword = ref('')
 const newPassword = ref('')
