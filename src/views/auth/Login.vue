@@ -177,6 +177,7 @@
           <div class="flex justify-end pt-2">
             <button
               type="button"
+              @click="$router.push('/forgot')"
               class="text-[#49beb7] hover:underline transition-all font-semibold text-sm"
             >
               ¿Olvidaste tu contraseña?
