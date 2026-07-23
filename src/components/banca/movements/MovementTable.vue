@@ -108,7 +108,7 @@ const goToPage = (page) => {
         <!-- Paginación inferior estilizada -->
        <div class="flex items-center justify-between px-6 py-4 bg-white border-t border-slate-100">
             <span class="text-xs font-medium text-slate-400">
-                Mostrando <span class="text-slate-700 font-bold">{{ pageSize }}</span> resultados
+               Mostrando <span class="text-slate-700 font-bold">{{ movements.length }}</span> resultados
             </span>
             
             <div class="flex items-center space-x-1.5">
