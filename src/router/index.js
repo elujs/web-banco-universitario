@@ -6,6 +6,8 @@ import UserRegister from '../views/auth/UserRegister.vue'
 import Dashboard from '../views/banca/dashboard.vue'
 import MovementsView from '../views/banca/MovementsView.vue'
 import Contactos from '../views/banca/contactos.vue'
+import SecurityView from '../views/banca/SecurityView.vue'
+import TransferView from '../views/banca/TransferView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,10 +40,16 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
-    path: '/security',
-    name: 'security',
-    component: () => import('@/views/banca/SecurityView.vue'),
-    meta: { requiresAuth: true }
+      path: '/security',
+      name: 'security',
+      component: SecurityView,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: '/transfers',
+      name: 'transfers',
+      component: TransferView,
+      meta: { requiresAuth: true },
     },
     {
       path: '/contacts',
@@ -52,12 +60,11 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to) => {
   const token = localStorage.getItem('token')
   if (to.meta.requiresAuth && !token) {
-    next('/login')
-  } else {
-    next()
+    return '/login'
   }
 })
+
 export default router
