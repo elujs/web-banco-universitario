@@ -8,6 +8,7 @@ import MovementsView from '../views/banca/MovementsView.vue'
 import Contactos from '../views/banca/contactos.vue'
 import SecurityView from '../views/banca/SecurityView.vue'
 import TransferView from '../views/banca/TransferView.vue'
+import ProfileView from '../views/banca/ProfileView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -57,13 +58,26 @@ const router = createRouter({
       component: Contactos,
       meta: { requiresAuth: true },
     },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: ProfileView,
+      meta: { requiresAuth: true },
+    },
   ],
 })
 
-router.beforeEach((to) => {
+router.beforeEach((to, from) => {
   const token = localStorage.getItem('token')
+
+  // Si la ruta requiere autenticación y no hay token, redirigir al login
   if (to.meta.requiresAuth && !token) {
-    return '/login'
+    return { name: 'login' }
+  }
+
+  // Si ya estás logueado e intentas ir al login, mandarte al dashboard
+  if (to.name === 'login' && token) {
+    return { name: 'dashboard' }
   }
 })
 
