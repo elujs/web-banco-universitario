@@ -259,7 +259,7 @@ const handleResetPassword = async () => {
       body: JSON.stringify({
         email: sentEmail.value,
         code: verificationCode.value,
-        password: newPassword.value,
+        new_password: newPassword.value,
       }),
     })
 
